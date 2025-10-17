@@ -44,9 +44,9 @@ public class PlayerController : MonoBehaviour
         {
             _currentSpeed -= deceleration * Time.deltaTime;
         }
-        else if (_input == Vector3.zero && _currentSpeed < maxSpeed)
+        else if (_input != Vector3.zero && _currentSpeed < maxSpeed)
         {
-            _currentSpeed += accelaration * Time.deltaTime;
+            _currentSpeed += acceleration * Time.deltaTime;
         }
 
         _currentSpeed = Mathf.Clamp(_currentSpeed, 0, maxSpeed);

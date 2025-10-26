@@ -13,7 +13,7 @@ public class EnemyPatrol3D : MonoBehaviour
     [Header("Chase Config")]
     [SerializeField] private Transform player;
     [SerializeField] private float chaseRange = 5f;
-    [SerializeField] private float loseRange = 5f;
+    [SerializeField] private float loseRange = 25f;
 
     private Vector3[] _initialPointPos;
     private int patrolPointIdx = 0;

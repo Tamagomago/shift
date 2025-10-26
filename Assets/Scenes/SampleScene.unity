@@ -3767,7 +3767,7 @@ MonoBehaviour:
   - {fileID: 1132384597}
   player: {fileID: 2044728174}
   chaseRange: 5
-  loseRange: 5
+  loseRange: 25
 --- !u!195 &991450405
 NavMeshAgent:
   m_ObjectHideFlags: 0

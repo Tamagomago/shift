@@ -3,6 +3,9 @@ using UnityEngine;
 public class Switch : MonoBehaviour
 {
     public MovingPlatform platformToActivate;
+    public SmoothPopup interactPopup; 
+  
+
     private bool hasBeenActivated = false;
     
     // Optional: Materials to show the switch state
@@ -42,6 +45,13 @@ public class Switch : MonoBehaviour
         {
             switchRenderer.material = activeMaterial;
         }
+
+        // Permanently hide the pop-up, since the switch is used
+        if (interactPopup != null)
+        {
+            interactPopup.Hide(); 
+        }
+    
     }
 
     // This function is called by Unity when another collider enters this trigger
@@ -55,6 +65,13 @@ public class Switch : MonoBehaviour
             if (player != null)
             {
                 player.SetCurrentSwitch(this);
+
+                
+                // Show the pop-up (if the switch hasn't been used yet)
+                if (interactPopup != null && !hasBeenActivated)
+                {
+                    interactPopup.Show(); // Use our smooth show function
+                }
             }
         }
     }
@@ -69,6 +86,12 @@ public class Switch : MonoBehaviour
             if (player != null)
             {
                 player.ClearCurrentSwitch(this);
+
+                // Hide the pop-up when the player walks away
+                if (interactPopup != null)
+                {
+                    interactPopup.Hide(); // Use our smooth hide function
+                }
             }
         }
     }

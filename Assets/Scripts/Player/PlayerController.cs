@@ -7,15 +7,12 @@ public class PlayerController : MonoBehaviour
     private InputSystem_Actions _playerInputActions;
     private CharacterController _characterController;
     [Header("Movement Config")]
-    [SerializeField] private float maxSpeed = 10f;
-    [SerializeField] private float rotationSpeed = 360f;
-    [SerializeField] private float acceleration = 15f;
-    [SerializeField] private float deceleration = 10f;
+    [SerializeField] private float speed = 5f;
+    // [SerializeField] private float rotationSpeed = 360f;
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float fallMultiplier = 1.5f;
     private float _verticalVelocity;
-    private float _currentSpeed;
     private Vector3 _input;
 
     // --- PLATFORM UTILS ---
@@ -56,7 +53,6 @@ public class PlayerController : MonoBehaviour
     {
         GetInput();
         Look();
-        CalculateSpeed();
         Move();
     }
 
@@ -125,19 +121,7 @@ public class PlayerController : MonoBehaviour
         }
         
     }
-    private void CalculateSpeed()
-    {
-        if (_input == Vector3.zero && _currentSpeed > 0)
-        {
-            _currentSpeed -= deceleration * Time.deltaTime;
-        }
-        else if (_input != Vector3.zero && _currentSpeed < maxSpeed)
-        {
-            _currentSpeed += acceleration * Time.deltaTime;
-        }
 
-        _currentSpeed = Mathf.Clamp(_currentSpeed, 0, maxSpeed);
-    }
     
     private void Look()
     {
@@ -148,7 +132,7 @@ public class PlayerController : MonoBehaviour
         Vector3 multipliedMatrix = isometricMatrix.MultiplyPoint3x4(_input);
 
         Quaternion rotation = Quaternion.LookRotation(multipliedMatrix, Vector3.up);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
+        transform.rotation = rotation;
     }
 
     private void Move()
@@ -160,7 +144,7 @@ public class PlayerController : MonoBehaviour
 
         _verticalVelocity += gravity * fallMultiplier * Time.deltaTime;
 
-        Vector3 moveDirection = transform.forward * _currentSpeed * _input.magnitude;
+        Vector3 moveDirection = transform.forward * speed * _input.magnitude;
         moveDirection.y = _verticalVelocity;
 
         _characterController.Move(moveDirection * Time.deltaTime);
@@ -171,6 +155,6 @@ public class PlayerController : MonoBehaviour
         Vector2 input = _playerInputActions.Player.Move.ReadValue<Vector2>();
         _input = new Vector3(input.x, 0, input.y).normalized;
 
-        Debug.Log($"Input: {_input}");
+        Debug.Log($"Input: {_input}"); 
     }
 }

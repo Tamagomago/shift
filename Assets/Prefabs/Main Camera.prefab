@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 45, y: -146.66, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: -135, z: 0}
 --- !u!20 &7954101683159239918
 Camera:
   m_ObjectHideFlags: 0
@@ -70,7 +70,7 @@ Camera:
   far clip plane: 1000
   field of view: 60.000004
   orthographic: 1
-  orthographic size: 7.25
+  orthographic size: 13.63
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

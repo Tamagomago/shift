@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,24 +7,36 @@ public class PlayerController : MonoBehaviour
 {
     private InputSystem_Actions _playerInputActions;
     private CharacterController _characterController;
+    
     [Header("Movement Config")]
-    [SerializeField] private float speed = 5f;
-    // [SerializeField] private float rotationSpeed = 360f;
-    [SerializeField] private float jumpForce = 5f;
+    [SerializeField] private float maxSpeed = 10f;
+    [SerializeField] private float rotationSpeed = 360f;
+    [SerializeField] private float acceleration = 15f;
+    [SerializeField] private float deceleration = 10f;
+    [SerializeField] private float jumpForce = 10f;
     [SerializeField] private float gravity = -9.81f;
-    [SerializeField] private float fallMultiplier = 1.5f;
+    [SerializeField] private float fallMultiplier = 2f;
+    
+    [Header("Respawn Config")]
+    [SerializeField] private float respawnDelay = 0.3f;
+
+    private Vector3 _initialPos;
     private float _verticalVelocity;
+    private float _currentSpeed;
     private Vector3 _input;
 
     // --- PLATFORM UTILS ---
     private Switch _currentSwitch; // Reference to the current switch the player is interacting with
     private Transform _currentPlatform; // Reference to the platform the player is standing on (if any)
     private Vector3 _platformLastPosition;
+
     private void Awake()
     {
         _playerInputActions = new InputSystem_Actions();
         _characterController = GetComponent<CharacterController>();
+        _initialPos = transform.position;
     }
+
     private void OnEnable()
     {
         if (_playerInputActions == null)
@@ -38,6 +51,7 @@ public class PlayerController : MonoBehaviour
         // Subscribe to Interact action binding
         _playerInputActions.Player.Interact.performed += OnInteractPerformed;
     }
+
     private void OnDisable()
     {
         // Unsubscribe to Jump action binding
@@ -52,8 +66,9 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         GetInput();
-        Look();
-        Move();
+        CalculateSpeed();
+        LookAndMove();
+        Debug.Log("isGrounded Param: " + _characterController.isGrounded);
     }
 
     // Called when the the "Interact" button is pressed
@@ -113,6 +128,7 @@ public class PlayerController : MonoBehaviour
             _currentPlatform = null;
         }
     }
+
     private void OnJumpPerformed(InputAction.CallbackContext context)
     {
         if (_characterController.isGrounded)
@@ -122,32 +138,44 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    
-    private void Look()
+    private void CalculateSpeed()
     {
-        // No movement input is read
-        if (_input == Vector3.zero) return;
-
-        Matrix4x4 isometricMatrix = Matrix4x4.Rotate(Quaternion.Euler(0, -135, 0));
-        Vector3 multipliedMatrix = isometricMatrix.MultiplyPoint3x4(_input);
-
-        Quaternion rotation = Quaternion.LookRotation(multipliedMatrix, Vector3.up);
-        transform.rotation = rotation;
-    }
-
-    private void Move()
-    {
-        if (_characterController.isGrounded && _verticalVelocity < 0)
+        if (_input == Vector3.zero && _currentSpeed > 0)
         {
-            _verticalVelocity = -1.5f;
+            _currentSpeed -= deceleration * Time.deltaTime;
         }
+        else if (_input != Vector3.zero && _currentSpeed < maxSpeed)
+        {
+            _currentSpeed += acceleration * Time.deltaTime;
+        }
+
+        _currentSpeed = Mathf.Clamp(_currentSpeed, 0, maxSpeed);
+    }
+    
+
+    private void LookAndMove()
+    {
+        Vector2 input2D = _playerInputActions.Player.Move.ReadValue<Vector2>();
+        _input = new Vector3(input2D.x, 0, input2D.y);
+
+        Vector3 forwardIso = new Vector3(-1, 0, -1).normalized;
+        Vector3 rightIso = new Vector3(-1, 0, 1).normalized;
+
+        Vector3 moveDir = (forwardIso * _input.z + rightIso * _input.x).normalized;
+
+        if (_characterController.isGrounded && _verticalVelocity < 0) _verticalVelocity = -1.5f;
 
         _verticalVelocity += gravity * fallMultiplier * Time.deltaTime;
 
-        Vector3 moveDirection = transform.forward * speed * _input.magnitude;
-        moveDirection.y = _verticalVelocity;
+        if (moveDir.sqrMagnitude > 0.01f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(moveDir);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
 
-        _characterController.Move(moveDirection * Time.deltaTime);
+        Vector3 velocity = moveDir * _currentSpeed;
+        velocity.y = _verticalVelocity;
+        _characterController.Move(velocity * Time.deltaTime);
     }
     
     private void GetInput()
@@ -155,6 +183,19 @@ public class PlayerController : MonoBehaviour
         Vector2 input = _playerInputActions.Player.Move.ReadValue<Vector2>();
         _input = new Vector3(input.x, 0, input.y).normalized;
 
-        Debug.Log($"Input: {_input}"); 
+        Debug.Log($"Input: {_input}");
+    }
+
+    // "Respawn" the player back to the original location
+    public IEnumerator Respawn() {
+        Debug.Log("Started Coroutine at timestamp : " + Time.time);
+        yield return new WaitForSeconds(respawnDelay);
+
+        // Teleporting a CharacterController can cause collisions; disable it briefly
+        _characterController.enabled = false;
+        transform.position = _initialPos;
+        _verticalVelocity = 0f;
+        _currentSpeed = 0f;
+        _characterController.enabled = true;
     }
 }

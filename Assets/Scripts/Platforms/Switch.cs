@@ -4,13 +4,15 @@ public class Switch : MonoBehaviour
 {
     public MovingPlatform platformToActivate;
     public SmoothPopup interactPopup; 
+  
 
-    // Materials to indicate switch state
+    private bool hasBeenActivated = false;
+    
+    // Optional: Materials to show the switch state
     public Material inactiveMaterial;
     public Material activeMaterial;
-
+    
     private Renderer switchRenderer;
-    private bool isActive = false; // Tracks the current visual state
 
     void Start()
     {
@@ -22,53 +24,62 @@ public class Switch : MonoBehaviour
         }
     }
 
-    // When the 'E' key is pressed
+    // when the 'E' key is pressed.
     public void ActivateSwitch()
     {
-        // Toggle the switch every time the player activates it
-        isActive = !isActive;
+        // Check if the switch has already been used
+        if (hasBeenActivated)
+        {
+            return; // Do nothing if already activated
+        }
+        
+        // Set the flag to true so this only runs once
+        hasBeenActivated = true;
 
-        // Trigger the platform movement
         if (platformToActivate != null)
         {
             platformToActivate.ActivatePlatform();
-            Debug.Log("Switch activated! Platform should move.");
         }
 
-        // Change switch material based on state
+        if (switchRenderer != null && activeMaterial != null)
+        {
+            switchRenderer.material = activeMaterial;
+        }
 
-        // Show or hide the popup (optional behavior)
+        // Permanently hide the pop-up, since the switch is used
         if (interactPopup != null)
         {
-            if (isActive)
-                interactPopup.Hide(); // Hide when activated
-            else
-                interactPopup.Show(); // Show again if toggled back
+            interactPopup.Hide(); 
         }
+    
     }
 
-    // Called when the player enters the trigger zone
+    // This function is called by Unity when another collider enters this trigger
     private void OnTriggerEnter(Collider other)
     {
+        // Check if the object that entered is the Player
         if (other.CompareTag("Player"))
         {
+            // Get the PlayerController script from the player
             PlayerController player = other.GetComponent<PlayerController>();
             if (player != null)
             {
                 player.SetCurrentSwitch(this);
 
-                // Show popup when near the switch
-                if (interactPopup != null)
+                
+                // Show the pop-up (if the switch hasn't been used yet)
+                if (interactPopup != null && !hasBeenActivated)
                 {
-                    interactPopup.Show();
+                    interactPopup.Show(); // Use our smooth show function
                 }
             }
         }
     }
 
-    // Called when the player exits the trigger zone
+    // This function is called by Unity when another collider exits this trigger
     private void OnTriggerExit(Collider other)
     {
+        // Check if the object that exited is the Player
         if (other.CompareTag("Player"))
         {
             PlayerController player = other.GetComponent<PlayerController>();
@@ -76,12 +87,13 @@ public class Switch : MonoBehaviour
             {
                 player.ClearCurrentSwitch(this);
 
-                // Hide the popup when the player walks away
+                // Hide the pop-up when the player walks away
                 if (interactPopup != null)
                 {
-                    interactPopup.Hide();
+                    interactPopup.Hide(); // Use our smooth hide function
                 }
             }
         }
     }
 }
+

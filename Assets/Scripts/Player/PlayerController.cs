@@ -118,22 +118,6 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Out of range of switch!");
         }
     }
-
-    // Called by PlatformTrigger when the player steps onto a platform
-    private void LateUpdate()
-    {
-        if (_currentPlatform != null)
-        {
-            // Calculate how much the platform has moved since the last frame
-            Vector3 deltaMovement = _currentPlatform.position - _platformLastPosition;
-
-            // Move the character controller by that same amount
-            _characterController.Move(deltaMovement);
-
-            // Update the platform's last known position for the next frame
-            _platformLastPosition = _currentPlatform.position;
-        }
-    }
     
     // This function is called by PlatformTrigger.cs when we step ON the platform
     public void SetCurrentPlatform(Transform newPlatform)
@@ -160,6 +144,9 @@ public class PlayerController : MonoBehaviour
             _verticalVelocity = jumpForce;
             _anim.SetBool("isJumping", true);
             _anim.SetBool("isGrounded", false);
+                
+            // Detach from platform while jumping;
+            _currentPlatform = null;
         }
     }
 
@@ -173,14 +160,13 @@ public class PlayerController : MonoBehaviour
 
     private void LookAndMove()
     {
-        Vector2 input2D = _playerInputActions.Player.Move.ReadValue<Vector2>();
-        _input = new Vector3(input2D.x, 0, input2D.y);
-
+        // Define world directions relative to isometric camera (-135 degrees)
         Vector3 forwardIso = new Vector3(-1, 0, -1).normalized;
         Vector3 rightIso = new Vector3(-1, 0, 1).normalized;
-
+        // Combine isometric directions to get final move direction
         Vector3 moveDir = (forwardIso * _input.z + rightIso * _input.x).normalized;
 
+        // If the player is grounded, apply small velocity, else apply gravity 
         if (_characterController.isGrounded)
         {
             if (_verticalVelocity < 0) _verticalVelocity = -2f;
@@ -189,15 +175,26 @@ public class PlayerController : MonoBehaviour
         {
             _verticalVelocity += gravity * fallMultiplier * Time.deltaTime;
         }
-
+        
+        // Rotate player towards movement direction
         if (moveDir.sqrMagnitude > 0.01f)
         {
             Quaternion targetRotation = Quaternion.LookRotation(moveDir);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
+        // Combine horizontal movement and vertical velocity
         Vector3 velocity = moveDir * _currentSpeed;
         velocity.y = _verticalVelocity;
+
+        if (_currentPlatform != null)
+        {
+            Vector3 platformDeltaPos = (_currentPlatform.position - _platformLastPosition) / Time.deltaTime;
+            velocity += platformDeltaPos;
+            _platformLastPosition = _currentPlatform.position;
+        }
+        
+        // Move character with final combined velocity
         _characterController.Move(velocity * Time.deltaTime);
     }
     

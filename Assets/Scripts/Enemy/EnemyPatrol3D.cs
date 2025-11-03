@@ -48,7 +48,7 @@ public class EnemyPatrol3D : MonoBehaviour
         }
 
         DetectPlayer();
-        Debug.Log($"{gameObject.name} | Agent Pos: {agent.transform.position:F2} | Target: {agent.destination:F2} | Remaining: {agent.remainingDistance:F2}");
+        // Debug.Log($"{gameObject.name} | Agent Pos: {agent.transform.position:F2} | Target: {agent.destination:F2} | Remaining: {agent.remainingDistance:F2}");
         if(_isChasing)
         {
             agent.isStopped = false;

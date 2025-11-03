@@ -18,10 +18,15 @@ public class ToggleDimension : MonoBehaviour
 
     // Track which realm is currently active
     private bool isLightRealmActive = true;
-    
+
     // Prevent spamming the switch
     private bool isTransitioning = false;
 
+    [Header("Dark Realm Timer Settings")]
+    [SerializeField] private float timerDuration = 5f; // change later
+    private Coroutine darkRealmTimerCoroutine;
+    private PlayerController _playerController;
+    private bool _isTimerRunning = false;
     // Lists to hold all materials we need to change
     private List<Material> lightRealmMaterials = new List<Material>();
     private List<Material> darkRealmMaterials = new List<Material>();
@@ -48,6 +53,13 @@ public class ToggleDimension : MonoBehaviour
 
     private void Start()
     {
+        // Find PlayerController to toggle respawn later
+        _playerController = GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerController>();
+        if (_playerController == null)
+        {
+            Debug.LogWarning("PlayerController not found! Make sure your player has the correct tag and script.");
+            return;
+        }
         // Set initial state
         // Active realm is at 0 (visible), inactive realm is at 1 (dissolved)
         SetDissolve(lightRealmMaterials, isLightRealmActive ? 0 : 1);
@@ -91,16 +103,46 @@ public class ToggleDimension : MonoBehaviour
         {
             // Fade OUT Dark Realm, Fade IN Light Realm
             StartCoroutine(TransitionRealm(darkRealm, lightRealm, darkRealmMaterials, lightRealmMaterials));
+            // Stop any dark realm timers from running and clear flags
+            if (darkRealmTimerCoroutine != null)
+            {
+                StopCoroutine(darkRealmTimerCoroutine);
+                darkRealmTimerCoroutine = null;
+            }
+            _isTimerRunning = false;
         }
         else
         {
             // Fade OUT Light Realm, Fade IN Dark Realm
             StartCoroutine(TransitionRealm(lightRealm, darkRealm, lightRealmMaterials, darkRealmMaterials));
+            // Start dark realm timer
+            if (darkRealmTimerCoroutine != null)
+            {
+                StopCoroutine(darkRealmTimerCoroutine);
+                darkRealmTimerCoroutine = null;
+                _isTimerRunning = false;
+            }
+            // Start the dark realm timer only after the transition completes
+            StartCoroutine(StartTimerAfterTransition());
         }
 
         Debug.Log("Switching to " + (isLightRealmActive ? "Light Realm" : "Dark Realm"));
     }
 
+    // Waits for the current transition to finish before starting the dark realm timer.
+    private IEnumerator StartTimerAfterTransition()
+    {
+        // Wait until transition finishes (or no transition in progress)
+        yield return new WaitUntil(() => !isTransitioning);
+
+        // If the player left the dark realm before transition finished, don't start the timer
+        if (isLightRealmActive) yield break;
+
+        // Guard again just in case
+        if (_isTimerRunning) yield break;
+
+        darkRealmTimerCoroutine = StartCoroutine(DarkRealmTimer());
+    }
     private IEnumerator TransitionRealm(GameObject realmToFadeOut, GameObject realmToFadeIn, List<Material> materialsOut, List<Material> materialsIn)
     {
         isTransitioning = true;
@@ -108,7 +150,7 @@ public class ToggleDimension : MonoBehaviour
 
         // 1. Make the "Fade In" realm active so we can see its dissolve effect
         realmToFadeIn.SetActive(true);
-        
+
         // We assume its materials are starting at dissolve = 1 (invisible)
 
         while (elapsedTime < transitionDuration)
@@ -143,5 +185,40 @@ public class ToggleDimension : MonoBehaviour
         {
             mat.SetFloat(dissolvePropertyName, value);
         }
+    }
+
+    private IEnumerator DarkRealmTimer()
+    {
+        if (_isTimerRunning) yield break;
+        
+        _isTimerRunning = true;
+        Debug.Log("Timer started");
+
+        float elapsedTime = 0f;
+        while (elapsedTime < timerDuration)
+        {
+            // If player left the dark realm (shifted back) stop early
+            if (isLightRealmActive)
+            {
+                Debug.Log("Timer stopped early — returned to light realm.");
+                _isTimerRunning = false;
+                darkRealmTimerCoroutine = null;
+                yield break;
+            }
+            elapsedTime += Time.deltaTime;
+            // Optional: remove or reduce frame spam logs
+            Debug.Log($"elapsed: {elapsedTime}");
+            yield return null;
+        }
+
+        Debug.Log("Time is up. Returning to spawn point");
+        _isTimerRunning = false;
+        darkRealmTimerCoroutine = null;
+
+        // Ensure the state correctly reflects switching back to light realm
+        isLightRealmActive = true;
+        StartCoroutine(TransitionRealm(darkRealm, lightRealm, darkRealmMaterials, lightRealmMaterials));
+
+        if (_playerController != null) _playerController.Respawn();
     }
 }

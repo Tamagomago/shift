@@ -5,14 +5,15 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
+    private Animator _anim;
     private InputSystem_Actions _playerInputActions;
     private CharacterController _characterController;
     
     [Header("Movement Config")]
     [SerializeField] private float maxSpeed = 10f;
     [SerializeField] private float rotationSpeed = 360f;
-    [SerializeField] private float acceleration = 15f;
-    [SerializeField] private float deceleration = 10f;
+    [SerializeField] private float acceleration = 5f;
+    [SerializeField] private float deceleration = 5f;
     [SerializeField] private float jumpForce = 10f;
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float fallMultiplier = 2f;
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        _anim = GetComponent<Animator>();
         _playerInputActions = new InputSystem_Actions();
         _characterController = GetComponent<CharacterController>();
         _initialPos = transform.position;
@@ -68,8 +70,30 @@ public class PlayerController : MonoBehaviour
         GetInput();
         CalculateSpeed();
         LookAndMove();
+        UpdateAnimations();
         Debug.Log("isGrounded Param: " + _characterController.isGrounded);
     }
+
+    private void UpdateAnimations()
+    {
+        bool isGrounded = _characterController.isGrounded;
+        bool isJumping = _anim.GetBool("isJumping");
+
+        _anim.SetBool("isGrounded", isGrounded);
+
+        float speedNormalized = _currentSpeed / maxSpeed;
+        _anim.SetFloat("speed", speedNormalized);
+
+        if (!_characterController.isGrounded && _verticalVelocity < 0)
+        {
+            _anim.SetBool("isJumping", false);
+        }
+        if (isGrounded && isJumping)
+        {
+            _anim.SetBool("isJumping", false);
+        }
+    }
+
 
     // Called when the the "Interact" button is pressed
     private void OnInteractPerformed(InputAction.CallbackContext context)
@@ -134,24 +158,18 @@ public class PlayerController : MonoBehaviour
         if (_characterController.isGrounded)
         {
             _verticalVelocity = jumpForce;
+            _anim.SetBool("isJumping", true);
+            _anim.SetBool("isGrounded", false);
         }
-        
     }
 
     private void CalculateSpeed()
     {
-        if (_input == Vector3.zero && _currentSpeed > 0)
-        {
-            _currentSpeed -= deceleration * Time.deltaTime;
-        }
-        else if (_input != Vector3.zero && _currentSpeed < maxSpeed)
-        {
-            _currentSpeed += acceleration * Time.deltaTime;
-        }
+        float targetSpeed = (_input == Vector3.zero) ? 0f : maxSpeed;
+        float accel = (_input == Vector3.zero) ? deceleration : acceleration;
 
-        _currentSpeed = Mathf.Clamp(_currentSpeed, 0, maxSpeed);
+        _currentSpeed = Mathf.MoveTowards(_currentSpeed, targetSpeed, accel * Time.deltaTime);
     }
-    
 
     private void LookAndMove()
     {
@@ -163,9 +181,14 @@ public class PlayerController : MonoBehaviour
 
         Vector3 moveDir = (forwardIso * _input.z + rightIso * _input.x).normalized;
 
-        if (_characterController.isGrounded && _verticalVelocity < 0) _verticalVelocity = -1.5f;
-
-        _verticalVelocity += gravity * fallMultiplier * Time.deltaTime;
+        if (_characterController.isGrounded)
+        {
+            if (_verticalVelocity < 0) _verticalVelocity = -2f;
+        }
+        else
+        {
+            _verticalVelocity += gravity * fallMultiplier * Time.deltaTime;
+        }
 
         if (moveDir.sqrMagnitude > 0.01f)
         {

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &6498513125910565191
+--- !u!1001 &991954902699571097
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6fb8149bbf8bfb343babf64b7e8c6af1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.2117004
+      value: 8.79
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6fb8149bbf8bfb343babf64b7e8c6af1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -30,11 +30,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6fb8149bbf8bfb343babf64b7e8c6af1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.210515
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6fb8149bbf8bfb343babf64b7e8c6af1, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6fb8149bbf8bfb343babf64b7e8c6af1, type: 3}
       propertyPath: m_LocalRotation.x
@@ -42,7 +42,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6fb8149bbf8bfb343babf64b7e8c6af1, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6fb8149bbf8bfb343babf64b7e8c6af1, type: 3}
       propertyPath: m_LocalRotation.z
@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6fb8149bbf8bfb343babf64b7e8c6af1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6fb8149bbf8bfb343babf64b7e8c6af1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -62,35 +62,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6fb8149bbf8bfb343babf64b7e8c6af1, type: 3}
       propertyPath: m_Name
-      value: kael
+      value: Kael (Main Character)
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6fb8149bbf8bfb343babf64b7e8c6af1, type: 3}
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 6fb8149bbf8bfb343babf64b7e8c6af1, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 65f72d3fa90aca544a902162d9e74b28, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6fb8149bbf8bfb343babf64b7e8c6af1, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 123210263924393916}
+      addedObject: {fileID: 3966355619897668162}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6fb8149bbf8bfb343babf64b7e8c6af1, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1699723738566776514}
+      addedObject: {fileID: 5146774907840883723}
   m_SourcePrefab: {fileID: 100100000, guid: 6fb8149bbf8bfb343babf64b7e8c6af1, type: 3}
---- !u!1 &6263999725810347030 stripped
+--- !u!1 &73544595946883784 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 6fb8149bbf8bfb343babf64b7e8c6af1, type: 3}
-  m_PrefabInstance: {fileID: 6498513125910565191}
+  m_PrefabInstance: {fileID: 991954902699571097}
   m_PrefabAsset: {fileID: 0}
---- !u!143 &123210263924393916
+--- !u!143 &3966355619897668162
 CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6263999725810347030}
+  m_GameObject: {fileID: 73544595946883784}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -109,13 +113,13 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 2, z: 0}
---- !u!114 &1699723738566776514
+--- !u!114 &5146774907840883723
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6263999725810347030}
+  m_GameObject: {fileID: 73544595946883784}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da0ba5ff5c6f891429d9510123e2056a, type: 3}

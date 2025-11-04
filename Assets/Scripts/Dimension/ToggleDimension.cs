@@ -23,7 +23,7 @@ public class ToggleDimension : MonoBehaviour
     private bool isTransitioning = false;
 
     [Header("Dark Realm Timer Settings")]
-    [SerializeField] private float timerDuration = 5f; // change later
+    // [SerializeField] private float timerDuration = 5f; // change later
     private Coroutine darkRealmTimerCoroutine;
     private PlayerController _playerController;
     private bool _isTimerRunning = false;
@@ -141,7 +141,7 @@ public class ToggleDimension : MonoBehaviour
         // Guard again just in case
         if (_isTimerRunning) yield break;
 
-        darkRealmTimerCoroutine = StartCoroutine(DarkRealmTimer());
+        // darkRealmTimerCoroutine = StartCoroutine(DarkRealmTimer());
     }
     private IEnumerator TransitionRealm(GameObject realmToFadeOut, GameObject realmToFadeIn, List<Material> materialsOut, List<Material> materialsIn)
     {
@@ -187,38 +187,38 @@ public class ToggleDimension : MonoBehaviour
         }
     }
 
-    private IEnumerator DarkRealmTimer()
-    {
-        if (_isTimerRunning) yield break;
+    // private IEnumerator DarkRealmTimer()
+    // {
+    //     if (_isTimerRunning) yield break;
         
-        _isTimerRunning = true;
-        Debug.Log("Timer started");
+    //     _isTimerRunning = true;
+    //     Debug.Log("Timer started");
 
-        float elapsedTime = 0f;
-        while (elapsedTime < timerDuration)
-        {
-            // If player left the dark realm (shifted back) stop early
-            if (isLightRealmActive)
-            {
-                Debug.Log("Timer stopped early — returned to light realm.");
-                _isTimerRunning = false;
-                darkRealmTimerCoroutine = null;
-                yield break;
-            }
-            elapsedTime += Time.deltaTime;
-            // Optional: remove or reduce frame spam logs
-            Debug.Log($"elapsed: {elapsedTime}");
-            yield return null;
-        }
+    //     float elapsedTime = 0f;
+    //     while (elapsedTime < timerDuration)
+    //     {
+    //         // If player left the dark realm (shifted back) stop early
+    //         if (isLightRealmActive)
+    //         {
+    //             Debug.Log("Timer stopped early — returned to light realm.");
+    //             _isTimerRunning = false;
+    //             darkRealmTimerCoroutine = null;
+    //             yield break;
+    //         }
+    //         elapsedTime += Time.deltaTime;
+    //         // Optional: remove or reduce frame spam logs
+    //         Debug.Log($"elapsed: {elapsedTime}");
+    //         yield return null;
+    //     }
 
-        Debug.Log("Time is up. Returning to spawn point");
-        _isTimerRunning = false;
-        darkRealmTimerCoroutine = null;
+    //     Debug.Log("Time is up. Returning to spawn point");
+    //     _isTimerRunning = false;
+    //     darkRealmTimerCoroutine = null;
 
-        // Ensure the state correctly reflects switching back to light realm
-        isLightRealmActive = true;
-        StartCoroutine(TransitionRealm(darkRealm, lightRealm, darkRealmMaterials, lightRealmMaterials));
+    //     // Ensure the state correctly reflects switching back to light realm
+    //     isLightRealmActive = true;
+    //     StartCoroutine(TransitionRealm(darkRealm, lightRealm, darkRealmMaterials, lightRealmMaterials));
 
-        if (_playerController != null) _playerController.Respawn();
-    }
+    //     if (_playerController != null) _playerController.Respawn();
+    // }
 }

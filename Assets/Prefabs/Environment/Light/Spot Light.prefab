@@ -4780,7 +4780,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 64fc123c6083c4843b01801efb2886c9, type: 2}
+  - {fileID: 2100000, guid: c1ccb6e0f3ef94f58b389991f99b425b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9715,7 +9715,7 @@ Light:
   m_Color: {r: 0.9528302, g: 0.8293771, b: 0.5977661, a: 1}
   m_Intensity: 131.1
   m_Range: 41.224743
-  m_SpotAngle: 26.269709
+  m_SpotAngle: 39.821987
   m_InnerSpotAngle: 26.269709
   m_CookieSize: 10
   m_Shadows:

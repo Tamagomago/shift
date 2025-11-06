@@ -142,7 +142,7 @@ public class ToggleDimension : MonoBehaviour
         // Guard again just in case
         if (_isTimerRunning) yield break;
 
-        darkRealmTimerCoroutine = StartCoroutine(DarkRealmTimer());
+        // darkRealmTimerCoroutine = StartCoroutine(DarkRealmTimer());
     }
     private IEnumerator TransitionRealm(GameObject realmToFadeOut, GameObject realmToFadeIn, List<Material> materialsOut, List<Material> materialsIn)
     {

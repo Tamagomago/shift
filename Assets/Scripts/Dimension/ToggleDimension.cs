@@ -24,6 +24,7 @@ public class ToggleDimension : MonoBehaviour
 
     [Header("Dark Realm Timer Settings")]
     [SerializeField] private float timerDuration = 5f; // change later
+    [SerializeField] private TimerUI timerUI;
     private Coroutine darkRealmTimerCoroutine;
     private PlayerController _playerController;
     private bool _isTimerRunning = false;
@@ -194,6 +195,9 @@ public class ToggleDimension : MonoBehaviour
         _isTimerRunning = true;
         Debug.Log("Timer started");
 
+        timerUI.progressSlider.maxValue = timerDuration;
+        timerUI.SetProgress(timerDuration);
+
         float elapsedTime = 0f;
         while (elapsedTime < timerDuration)
         {
@@ -206,12 +210,16 @@ public class ToggleDimension : MonoBehaviour
                 yield break;
             }
             elapsedTime += Time.deltaTime;
+
+            float remaining = timerDuration - elapsedTime;
+            timerUI.SetProgress(remaining);
             // Optional: remove or reduce frame spam logs
             Debug.Log($"elapsed: {elapsedTime}");
             yield return null;
         }
 
         Debug.Log("Time is up. Returning to spawn point");
+        timerUI.SetProgress(0f);
         _isTimerRunning = false;
         darkRealmTimerCoroutine = null;
 

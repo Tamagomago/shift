@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8336072876778351654}
   - component: {fileID: 282206833038894902}
+  - component: {fileID: 3730953173793522535}
   m_Layer: 0
   m_Name: DimensionManager
   m_TagString: Untagged
@@ -48,3 +49,17 @@ MonoBehaviour:
   darkRealm: {fileID: 0}
   transitionDuration: 0.3
   dissolvePropertyName: _Dissolve
+  timerDuration: 5
+  timerUI: {fileID: 0}
+--- !u!114 &3730953173793522535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 80506485752093566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd37de894543dfc42bfdd06c4f15eea1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

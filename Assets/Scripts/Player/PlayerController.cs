@@ -12,14 +12,15 @@ public class PlayerController : MonoBehaviour
     [Header("Movement Config")]
     [SerializeField] private float maxSpeed = 10f;
     [SerializeField] private float rotationSpeed = 360f;
-    [SerializeField] private float jumpForce = 10f;
+    [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float fallMultiplier = 1f;
     [SerializeField] private float fallThreshold = 0.1f; // tolerance on how we can consider a fall for our animation
     
     [Header("Respawn Config")]
-    [SerializeField] private float respawnDelay = 0.3f;
+    [SerializeField] private float respawnDelay = 0.5f;
 
+    private ToggleDimension _toggleDimension;
     private Vector3 _initialPos;
     private float _verticalVelocity;
     private float _currentSpeed;
@@ -29,7 +30,7 @@ public class PlayerController : MonoBehaviour
     private MonoBehaviour _currentSwitchScript; // Reference to the current switch-like script the player is interacting with
     private Transform _currentPlatform; // Reference to the platform the player is standing on (if any)
     private Vector3 _platformLastPosition;
-
+    private DimensionManager _dimensionManager; // Reference to the current scene which we will get later for respawn
     // --- KEY & DOOR UTILS ---
     private Door _currentDoor; // Reference to the current door the player can interact with
     private int _lightKeys = 0;
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour
         _anim = GetComponent<Animator>();
         _playerInputActions = new InputSystem_Actions();
         _characterController = GetComponent<CharacterController>();
+        _dimensionManager = FindFirstObjectByType<DimensionManager>();
         _initialPos = transform.position;
     }
 
@@ -78,6 +80,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("isGrounded Param: " + _characterController.isGrounded);
     }
 
+    // TO FIX 
     private void UpdateAnimations()
     {
         bool isGrounded = _characterController.isGrounded;
@@ -206,6 +209,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // TO FIX JUMP LOGIC
     private void OnJumpPerformed(InputAction.CallbackContext context)
     {
         if (_characterController.isGrounded)
@@ -215,7 +219,7 @@ public class PlayerController : MonoBehaviour
             _hasJumped = true; // A jump was detected 
         }
     }
-
+    // TO FIX JUMP LOGIC
     private void LookAndMove()
     {
         // Define world directions relative to isometric camera (-135 degrees)
@@ -272,8 +276,15 @@ public class PlayerController : MonoBehaviour
 
         // Teleporting a CharacterController can cause collisions; disable it briefly
         _characterController.enabled = false;
-        transform.position = _initialPos;
         _verticalVelocity = 0f;
         _characterController.enabled = true;
+
+        // Switch to the other realm ONLY IF the player dies in the other realm
+        if(_dimensionManager.CurrentSceneDimension != _dimensionManager.ToggleDimensionRef.IsLightRealmActive)
+        {
+            _dimensionManager.ToggleDimensionRef.SwitchRealm(_dimensionManager.CurrentSceneDimension);
+        }
+        // Spawn the player to its initial position
+        transform.position = _initialPos;
     }
 }

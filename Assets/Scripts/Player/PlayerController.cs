@@ -12,11 +12,10 @@ public class PlayerController : MonoBehaviour
     [Header("Movement Config")]
     [SerializeField] private float maxSpeed = 10f;
     [SerializeField] private float rotationSpeed = 360f;
-    [SerializeField] private float acceleration = 5f;
-    [SerializeField] private float deceleration = 5f;
     [SerializeField] private float jumpForce = 10f;
     [SerializeField] private float gravity = -9.81f;
-    [SerializeField] private float fallMultiplier = 2f;
+    [SerializeField] private float fallMultiplier = 1f;
+    [SerializeField] private float fallThreshold = 0.1f; // tolerance on how we can consider a fall for our animation
     
     [Header("Respawn Config")]
     [SerializeField] private float respawnDelay = 0.3f;
@@ -25,7 +24,7 @@ public class PlayerController : MonoBehaviour
     private float _verticalVelocity;
     private float _currentSpeed;
     private Vector3 _input;
-
+    private bool _hasJumped = false;
     // --- PLATFORM UTILS ---
     private MonoBehaviour _currentSwitchScript; // Reference to the current switch-like script the player is interacting with
     private Transform _currentPlatform; // Reference to the platform the player is standing on (if any)
@@ -73,7 +72,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         GetInput();
-        CalculateSpeed();
+        _currentSpeed = (_input == Vector3.zero) ? 0f : maxSpeed;
         LookAndMove();
         UpdateAnimations();
         Debug.Log("isGrounded Param: " + _characterController.isGrounded);
@@ -82,21 +81,22 @@ public class PlayerController : MonoBehaviour
     private void UpdateAnimations()
     {
         bool isGrounded = _characterController.isGrounded;
-        bool isJumping = _anim.GetBool("isJumping");
+        bool isFalling = _hasJumped && _verticalVelocity < -fallThreshold;
+        bool isJumping = _hasJumped && _verticalVelocity > 0f;
 
+        // Update animator parameters
+        _anim.SetBool("isJumping", isJumping);
+        _anim.SetBool("isFalling", isFalling);
         _anim.SetBool("isGrounded", isGrounded);
 
+        // Reset _hasJumped on landing
+        if (isGrounded && _hasJumped)
+        {
+            _hasJumped = false;
+        }
+        // Update horizontal speed
         float speedNormalized = _currentSpeed / maxSpeed;
         _anim.SetFloat("speed", speedNormalized);
-
-        if (!_characterController.isGrounded && _verticalVelocity < 0)
-        {
-            _anim.SetBool("isJumping", false);
-        }
-        if (isGrounded && isJumping)
-        {
-            _anim.SetBool("isJumping", false);
-        }
     }
 
 
@@ -211,20 +211,9 @@ public class PlayerController : MonoBehaviour
         if (_characterController.isGrounded)
         {
             _verticalVelocity = jumpForce;
-            _anim.SetBool("isJumping", true);
-            _anim.SetBool("isGrounded", false);
-                
-            // Detach from platform while jumping;
-            _currentPlatform = null;
+            _currentPlatform = null; // Detach from any moving platform
+            _hasJumped = true; // A jump was detected 
         }
-    }
-
-    private void CalculateSpeed()
-    {
-        float targetSpeed = (_input == Vector3.zero) ? 0f : maxSpeed;
-        float accel = (_input == Vector3.zero) ? deceleration : acceleration;
-
-        _currentSpeed = Mathf.MoveTowards(_currentSpeed, targetSpeed, accel * Time.deltaTime);
     }
 
     private void LookAndMove()
@@ -236,13 +225,14 @@ public class PlayerController : MonoBehaviour
         Vector3 moveDir = (forwardIso * _input.z + rightIso * _input.x).normalized;
 
         // If the player is grounded, apply small velocity, else apply gravity 
-        if (_characterController.isGrounded)
+        if (_characterController.isGrounded && !_hasJumped)
         {
-            if (_verticalVelocity < 0) _verticalVelocity = -2f;
+            _verticalVelocity = -2f;
         }
         else
         {
-            _verticalVelocity += gravity * fallMultiplier * Time.deltaTime;
+            float gravityApplied = _verticalVelocity < 0f ? gravity * fallMultiplier : gravity;
+            _verticalVelocity += gravityApplied * Time.deltaTime;
         }
         
         // Rotate player towards movement direction
@@ -284,7 +274,6 @@ public class PlayerController : MonoBehaviour
         _characterController.enabled = false;
         transform.position = _initialPos;
         _verticalVelocity = 0f;
-        _currentSpeed = 0f;
         _characterController.enabled = true;
     }
 }

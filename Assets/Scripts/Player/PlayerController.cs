@@ -27,9 +27,14 @@ public class PlayerController : MonoBehaviour
     private Vector3 _input;
 
     // --- PLATFORM UTILS ---
-    private Switch _currentSwitch; // Reference to the current switch the player is interacting with
+    private MonoBehaviour _currentSwitchScript; // Reference to the current switch-like script the player is interacting with
     private Transform _currentPlatform; // Reference to the platform the player is standing on (if any)
     private Vector3 _platformLastPosition;
+
+    // --- KEY & DOOR UTILS ---
+    private Door _currentDoor; // Reference to the current door the player can interact with
+    private int _lightKeys = 0;
+    private int _darkKeys = 0;
 
     private void Awake()
     {
@@ -98,26 +103,90 @@ public class PlayerController : MonoBehaviour
     // Called when the the "Interact" button is pressed
     private void OnInteractPerformed(InputAction.CallbackContext context)
     {
-        if (_currentSwitch != null)
+        if (_currentSwitchScript != null)
         {
-            _currentSwitch.ActivateSwitch();
+            // Use SendMessage so we can activate any script that implements an ActivateSwitch method
+            _currentSwitchScript.SendMessage("ActivateSwitch", SendMessageOptions.DontRequireReceiver);
+        }
+
+        if (_currentDoor != null)
+        {
+            _currentDoor.TryOpen(this); // Pass 'this' (the player)
         }
     }
 
-    public void SetCurrentSwitch(Switch newSwitch)
+    public void SetCurrentSwitch(MonoBehaviour newSwitch)
     {
-        _currentSwitch = newSwitch;
-        Debug.Log("In range of switch!");
+        _currentSwitchScript = newSwitch;
+        Debug.Log("In range of switch/script: " + newSwitch.GetType().Name);
     }
 
-    public void ClearCurrentSwitch(Switch oldSwitch)
+    public void ClearCurrentSwitch(MonoBehaviour oldSwitch)
     {
-        if (_currentSwitch == oldSwitch)
+        if (_currentSwitchScript == oldSwitch)
         {
-            _currentSwitch = null;
-            Debug.Log("Out of range of switch!");
+            _currentSwitchScript = null;
+            Debug.Log("Out of range of switch/script: " + oldSwitch.GetType().Name);
         }
     }
+
+    #region Key Management
+
+    // Called by Key.cs when a key is collected
+    public void AddKey(KeyType type)
+    {
+        if (type == KeyType.Light)
+        {
+            _lightKeys++;
+        }
+        else if (type == KeyType.Dark)
+        {
+            _darkKeys++;
+        }
+        Debug.Log($"Collected {type} key. Total Light: {_lightKeys}, Total Dark: {_darkKeys}");
+        // Here you would also update your UI
+    }
+
+    // Called by Door.cs to check if we can open it
+    public bool HasKeys(int lightNeeded, int darkNeeded)
+    {
+        return _lightKeys >= lightNeeded && _darkKeys >= darkNeeded;
+    }
+
+    // Called by Door.cs when it successfully opens
+    public void UseKeys(int lightToUse, int darkToUse)
+    {
+        // This assumes HasKeys was already checked
+        _lightKeys -= lightToUse;
+        _darkKeys -= darkToUse;
+        Debug.Log($"Used keys. Remaining Light: {_lightKeys}, Remaining Dark: {_darkKeys}");
+        // Here you would also update your UI
+    }
+
+    #endregion
+
+    #region Door Interaction
+
+    // Called by Door.cs on trigger enter
+    public void SetCurrentDoor(Door newDoor)
+    {
+        _currentDoor = newDoor;
+        Debug.Log("In range of door!");
+        // Here you could show an "Press E to interact" UI prompt
+    }
+
+    // Called by Door.cs on trigger exit
+    public void ClearCurrentDoor(Door oldDoor)
+    {
+        if (_currentDoor == oldDoor)
+        {
+            _currentDoor = null;
+            Debug.Log("Out of range of door!");
+            // Here you would hide the UI prompt
+        }
+    }
+
+    #endregion
     
     // This function is called by PlatformTrigger.cs when we step ON the platform
     public void SetCurrentPlatform(Transform newPlatform)

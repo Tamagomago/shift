@@ -1,24 +1,23 @@
 using UnityEngine;
+using TMPro; // ++ ADDED: Required namespace for TextMeshPro
 
 public class Switch : MonoBehaviour
 {
     public MovingPlatform platformToActivate;
-    public SmoothPopup interactPopup; 
+    public RotatorSwitch rotatorToActivate; // optional rotator target
 
-    // Materials to indicate switch state
-    public Material inactiveMaterial;
-    public Material activeMaterial;
+    // The popup object shown when the player can interact
+    public GameObject interactPopup; 
 
-    private Renderer switchRenderer;
-    private bool isActive = false; // Tracks the current visual state
+    public Animator leverAnimator; 
+    private bool isActive = false; // Tracks the current state
 
     void Start()
     {
-        // Get the Renderer component to change material
-        switchRenderer = GetComponent<Renderer>();
-        if (switchRenderer != null && inactiveMaterial != null)
+        // ++ ADDED: It's good practice to ensure the popup is hidden when the game starts.
+        if (interactPopup != null)
         {
-            switchRenderer.material = inactiveMaterial;
+            interactPopup.gameObject.SetActive(false);
         }
     }
 
@@ -35,15 +34,28 @@ public class Switch : MonoBehaviour
             Debug.Log("Switch activated! Platform should move.");
         }
 
-        // Change switch material based on state
+        // Trigger a rotator target if assigned (pass this switch as the activator)
+        if (rotatorToActivate != null)
+        {
+            rotatorToActivate.ActivateSwitch(this.gameObject);
+            Debug.Log($"Switch activated rotator: {rotatorToActivate.name}");
+        }
+
+        // Tell the Animator to change state
+        if (leverAnimator != null)
+        {
+            leverAnimator.SetBool("isOn", isActive);
+        }
 
         // Show or hide the popup (optional behavior)
         if (interactPopup != null)
         {
             if (isActive)
-                interactPopup.Hide(); // Hide when activated
+                // ++ CHANGED: Use .gameObject.SetActive(false) to hide
+                interactPopup.gameObject.SetActive(false); // Hide when activated
             else
-                interactPopup.Show(); // Show again if toggled back
+                // ++ CHANGED: Use .gameObject.SetActive(true) to show
+                interactPopup.gameObject.SetActive(true); // Show again if toggled back
         }
     }
 
@@ -58,9 +70,11 @@ public class Switch : MonoBehaviour
                 player.SetCurrentSwitch(this);
 
                 // Show popup when near the switch
-                if (interactPopup != null)
+                // ++ MODIFIED: Also check if the switch isn't already active
+                if (interactPopup != null && !isActive) 
                 {
-                    interactPopup.Show();
+                    // ++ CHANGED: Use .gameObject.SetActive(true) to show
+                    interactPopup.gameObject.SetActive(true);
                 }
             }
         }
@@ -79,7 +93,8 @@ public class Switch : MonoBehaviour
                 // Hide the popup when the player walks away
                 if (interactPopup != null)
                 {
-                    interactPopup.Hide();
+                    // ++ CHANGED: Use .gameObject.SetActive(false) to hide
+                    interactPopup.gameObject.SetActive(false);
                 }
             }
         }

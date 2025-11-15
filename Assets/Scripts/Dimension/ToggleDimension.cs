@@ -13,7 +13,6 @@ public class ToggleDimension : MonoBehaviour
 
     [Header("Transition Settings")]
     public float transitionDuration = 0.5f; 
-    
     public string dissolvePropertyName = "_Dissolve";
 
     // Track which realm is currently active
@@ -82,7 +81,7 @@ public class ToggleDimension : MonoBehaviour
     }
 
     public void OnShiftPerformed(InputAction.CallbackContext context)
-    {
+    { 
         // If we're not pressing the button or already switching, do nothing
         if (!context.performed || isTransitioning) return;
 

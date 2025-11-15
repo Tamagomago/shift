@@ -15,7 +15,6 @@ public class ShakeAndFallPlatform : MonoBehaviour
     private float shakeMagnitude = 0.1f;
     private Rigidbody rb;
     private Vector3 originalPosition;
-    private bool hasBeenTriggered = false;
     private Collider platformCollider;
 
     [Header("Fall (transform-based)")]
@@ -28,6 +27,18 @@ public class ShakeAndFallPlatform : MonoBehaviour
     [SerializeField, Tooltip("If true, the platform's collider will be disabled when it starts falling to avoid physics overlaps.")]
     private bool disableCollisionsOnFall = true;
 
+    // --- state tracking to survive disable/enable ---
+    private enum PlatformState { Idle, Shaking, Falling, Finished }
+    private PlatformState state = PlatformState.Idle;
+
+    // preserved across disable/enable
+    private float shakeElapsed = 0f;
+    private float fallElapsed = 0f;
+    private float fallVelocity = 0f;
+
+    // guard so we don't start multiple coroutines
+    private bool sequenceCoroutineRunning = false;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -37,7 +48,6 @@ public class ShakeAndFallPlatform : MonoBehaviour
     void Start()
     {
         originalPosition = transform.position;
-        // Keep any Rigidbody present in kinematic mode so physics doesn't try to resolve overlaps.
         if (rb != null)
         {
             rb.isKinematic = true;
@@ -47,53 +57,86 @@ public class ShakeAndFallPlatform : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && !hasBeenTriggered)
+        // only start sequence from Idle state
+        if (other.CompareTag("Player") && state == PlatformState.Idle)
         {
             Debug.Log("Player triggered ShakeAndFallPlatform.");
-            hasBeenTriggered = true;
+            // mark that we've started the sequence
+            state = PlatformState.Shaking;
+            // initialize preserved values
+            shakeElapsed = 0f;
+            fallElapsed = 0f;
+            fallVelocity = fallInitialSpeed;
+            StartSequenceIfNeeded();
+        }
+    }
+
+    private void OnEnable()
+    {
+        // If we were mid-sequence when disabled, resume it
+        StartSequenceIfNeeded();
+    }
+
+    private void OnDisable()
+    {
+        // Coroutines get stopped automatically when the MonoBehaviour is disabled.
+        // Mark that our sequence coroutine is not running so OnEnable can restart it.
+        sequenceCoroutineRunning = false;
+    }
+
+    private void StartSequenceIfNeeded()
+    {
+        if (!sequenceCoroutineRunning && (state == PlatformState.Shaking || state == PlatformState.Falling))
+        {
             StartCoroutine(ShakeAndFallSequence());
         }
     }
 
     private IEnumerator ShakeAndFallSequence()
     {
-        float elapsedTime = 0f;
+        sequenceCoroutineRunning = true;
 
-        while (elapsedTime < shakeDuration)
+        // --- Shaking phase (may resume mid-shake using shakeElapsed) ---
+        while (shakeElapsed < shakeDuration)
         {
+            // if the object was moved externally, keep originalPosition as the intended center.
             float xOffset = Random.Range(-1f, 1f) * shakeMagnitude;
             float zOffset = Random.Range(-1f, 1f) * shakeMagnitude;
             transform.position = originalPosition + new Vector3(xOffset, 0f, zOffset);
 
-            elapsedTime += Time.deltaTime;
+            shakeElapsed += Time.deltaTime;
+            // if object gets disabled here, coroutine will stop and OnDisable will set sequenceCoroutineRunning = false
             yield return null;
         }
 
-        // Reset to the original position before falling
+        // ensure center before falling
         transform.position = originalPosition;
 
-        // Optionally disable the collider so the falling platform won't awkwardly overlap or push other colliders
+        // transition to falling
+        state = PlatformState.Falling;
+
+        // Optionally disable the collider once when falling starts
         if (disableCollisionsOnFall && platformCollider != null)
         {
             platformCollider.enabled = false;
         }
 
-        // Transform-driven fall: move down for the duration of destroyDelay, with acceleration
-        float elapsedFall = 0f;
-        float velocity = fallInitialSpeed;
+        // Ensure fallVelocity has sensible value if resumed directly in Falling state
+        if (fallVelocity <= 0f)
+            fallVelocity = fallInitialSpeed;
 
-        while (elapsedFall < destroyDelay)
+        // --- Falling phase (may resume mid-fall using fallElapsed and fallVelocity) ---
+        while (fallElapsed < destroyDelay)
         {
-            // Move down by velocity (units/s)
-            transform.position += Vector3.down * velocity * Time.deltaTime;
-
-            // Apply acceleration to velocity
-            velocity += fallAcceleration * Time.deltaTime;
-
-            elapsedFall += Time.deltaTime;
+            transform.position += Vector3.down * fallVelocity * Time.deltaTime;
+            fallVelocity += fallAcceleration * Time.deltaTime;
+            fallElapsed += Time.deltaTime;
             yield return null;
         }
 
+        // done
+        state = PlatformState.Finished;
+        sequenceCoroutineRunning = false;
         Destroy(gameObject);
     }
 }

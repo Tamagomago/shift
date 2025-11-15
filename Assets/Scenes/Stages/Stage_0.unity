@@ -842,6 +842,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd37de894543dfc42bfdd06c4f15eea1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lightRealmPlatformPos: []
+  darkRealmPlatformPos: []
 --- !u!1 &220083127
 GameObject:
   m_ObjectHideFlags: 0
@@ -1479,24 +1481,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3077076835328659999, guid: c4a7a56bdc321455b93d1b331aa117ee, type: 3}
   m_PrefabInstance: {fileID: 2013103161}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &516369196 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 404266437190424832, guid: 08335cfd854292d4ab8ea922529b4d8a, type: 3}
-  m_PrefabInstance: {fileID: 721857851}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &516369197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 516369196}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9d67908801820e4cbb0c30a773ae4be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shardRadius: 10
 --- !u!4 &519767582 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4915940100921510998, guid: 1baf5b7a4ff7a42d8baf3ea028aa53c0, type: 3}
@@ -1923,10 +1907,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 404266437190424832, guid: 08335cfd854292d4ab8ea922529b4d8a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 516369197}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08335cfd854292d4ab8ea922529b4d8a, type: 3}
 --- !u!1 &744749079
 GameObject:
@@ -2695,6 +2676,18 @@ PrefabInstance:
     - target: {fileID: 742698969131389042, guid: 42e967b51de740940beae5a9a31a489d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5146774907840883723, guid: 42e967b51de740940beae5a9a31a489d, type: 3}
+      propertyPath: jumpForce
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5146774907840883723, guid: 42e967b51de740940beae5a9a31a489d, type: 3}
+      propertyPath: respawnDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5146774907840883723, guid: 42e967b51de740940beae5a9a31a489d, type: 3}
+      propertyPath: fallMultiplier
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3900,7 +3893,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5096885327170889305, guid: ca874e100341f814d82e85f4ec39e9d9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -12.5
+      value: -20.5
       objectReference: {fileID: 0}
     - target: {fileID: 5096885327170889305, guid: ca874e100341f814d82e85f4ec39e9d9, type: 3}
       propertyPath: m_LocalPosition.z

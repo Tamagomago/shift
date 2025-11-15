@@ -277,8 +277,6 @@ public class PlayerController : MonoBehaviour
         // Teleporting a CharacterController can cause collisions; disable it briefly
         _characterController.enabled = false;
         _verticalVelocity = 0f;
-        _characterController.enabled = true;
-
         // Switch to the other realm ONLY IF the player dies in the other realm
         if(_dimensionManager.CurrentSceneDimension != _dimensionManager.ToggleDimensionRef.IsLightRealmActive)
         {
@@ -286,5 +284,7 @@ public class PlayerController : MonoBehaviour
         }
         // Spawn the player to its initial position
         transform.position = _initialPos;
+        _characterController.enabled = true;
+
     }
 }

@@ -6,6 +6,8 @@ public class ShardPlayerFollow : MonoBehaviour
     [SerializeField] private Vector3 offset = new Vector3(-0.6f, 3f, -1.5f); // Offset the shard to the top left of the player's shoulder
     [SerializeField] private float followSpeed = 3f;
 
+    // Expose player transform
+    public Transform PlayerRef => player;
     // LateUpdate ensures parent (player) updates position first before updating the shard's position
     void LateUpdate()
     {

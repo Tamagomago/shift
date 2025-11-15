@@ -8,26 +8,43 @@ public class EnemyPatrol3D : MonoBehaviour
     private bool _isChasing = false;
 
     [Header("Patrol Config")]
-    [SerializeField] private float speed = 3f;
+    [SerializeField] private float speed = 1f;
     [SerializeField] private Transform[] points;
     [Header("Chase Config")]
-    [SerializeField] private Transform player;
     [SerializeField] private float chaseRange = 5f;
     [SerializeField] private float loseRange = 25f;
+    
+    private Transform _player;
+    private DimensionManager _dimensionManager;
+    private PlayerController _playerController;
 
     private Vector3[] _initialPointPos;
     private int patrolPointIdx = 0;
-    private NavMeshAgent agent;
+    private NavMeshAgent _agent;
 
     void Awake()
     {
-        agent = GetComponent<NavMeshAgent>();
+        _agent = GetComponent<NavMeshAgent>();
+        _dimensionManager = FindFirstObjectByType<DimensionManager>();
+        if (_dimensionManager == null)
+        {
+            Debug.Log("No `DimensionManager` script found in scene!");
+        }
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // Detect player at runtime
+        GameObject taggedPlayer = GameObject.FindGameObjectWithTag("Player");
+        if (taggedPlayer == null) Debug.Log("No player found!");
+        _player = taggedPlayer.transform;
+
+        // Get reference to player controller for respawn on interaction
+        _playerController = taggedPlayer.GetComponent<PlayerController>();
+        if (_playerController == null) Debug.Log("No PlayerController found from player!");
+        
         _initialPointPos = points.Select(p => p.position).ToArray();
-        agent.speed = speed;
+        _agent.speed = speed;
 
         if (points.Length < 2)
         {
@@ -35,7 +52,7 @@ public class EnemyPatrol3D : MonoBehaviour
             return;
         }
 
-        agent.SetDestination(_initialPointPos[patrolPointIdx]);
+        _agent.SetDestination(_initialPointPos[patrolPointIdx]);
     }
 
     // Update is called once per frame
@@ -43,7 +60,7 @@ public class EnemyPatrol3D : MonoBehaviour
     {
         if (_isPaused)
         {
-            agent.isStopped = true;
+            _agent.isStopped = true;
             return;
         }
 
@@ -51,23 +68,24 @@ public class EnemyPatrol3D : MonoBehaviour
         // Debug.Log($"{gameObject.name} | Agent Pos: {agent.transform.position:F2} | Target: {agent.destination:F2} | Remaining: {agent.remainingDistance:F2}");
         if(_isChasing)
         {
-            agent.isStopped = false;
-            agent.SetDestination(player.position);
+            _agent.isStopped = false;
+            _agent.SetDestination(_player.position);
             return;
         }
         // agent.isStopped = false;
 
-        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance + 0.1f)
+        if (!_agent.pathPending && _agent.remainingDistance <= _agent.stoppingDistance + 0.1f)
         {
             GoToNextPoint();
         }
     }
 
+    
     private void DetectPlayer()
     {
-        if (player == null) return;
+        if (_player == null) return;
 
-        float distance = Vector3.Distance(transform.position, player.position);
+        float distance = Vector3.Distance(transform.position, _player.position);
 
         if (!_isChasing && distance <= chaseRange) StartChase();
         else if (_isChasing && distance > loseRange) StopChase();
@@ -76,14 +94,14 @@ public class EnemyPatrol3D : MonoBehaviour
     private void StartChase()
     {
         _isChasing = true;
-        agent.speed = speed + 1f;
-        Debug.Log($"{gameObject.name} started chasing {player.name}");
+        _agent.speed = speed + 1f;
+        Debug.Log($"{gameObject.name} started chasing {_player.name}");
     }
 
     private void StopChase()
     {
         _isChasing = false;
-        agent.speed = speed;
+        _agent.speed = speed;
         GoToNextPoint();
         Debug.Log($"{gameObject.name} stopped chasing and resumed patrol");
     }
@@ -97,6 +115,18 @@ public class EnemyPatrol3D : MonoBehaviour
         }
 
         patrolPointIdx = (patrolPointIdx + 1) % _initialPointPos.Length;
-        agent.SetDestination(_initialPointPos[patrolPointIdx]);
+        _agent.SetDestination(_initialPointPos[patrolPointIdx]);
+    }
+
+    // Check using collision detection if there are players attacked by the enemy
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player") && _playerController != null)
+        {
+            if (_dimensionManager != null && _dimensionManager.ToggleDimensionRef != null)
+            {
+                _dimensionManager.ToggleDimensionRef.SwitchRealm();
+            }
+        }
     }
 }

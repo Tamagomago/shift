@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5656024545175209929}
   - component: {fileID: 7167644591019517930}
   - component: {fileID: 2617871402882950695}
-  - component: {fileID: 5423911823565674426}
   m_Layer: 0
   m_Name: ShardCapsule
   m_TagString: Untagged
@@ -127,16 +126,3 @@ MonoBehaviour:
   player: {fileID: 0}
   offset: {x: -0.6, y: 3, z: -1.5}
   followSpeed: 3
---- !u!114 &5423911823565674426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 404266437190424832}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9d67908801820e4cbb0c30a773ae4be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shardRadius: 10

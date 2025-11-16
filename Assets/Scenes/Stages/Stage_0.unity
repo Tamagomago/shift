@@ -375,8 +375,8 @@ MonoBehaviour:
     But be careful!
     You can only stay for a limited amount of time'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e4b73216d54137c4ebe70bfde3107de7, type: 2}
-  m_sharedMaterial: {fileID: 3978908867597267023, guid: e4b73216d54137c4ebe70bfde3107de7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -470,7 +470,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 3978908867597267023, guid: e4b73216d54137c4ebe70bfde3107de7, type: 2}
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1318,8 +1318,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Try pressing Shift and see what happens!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e4b73216d54137c4ebe70bfde3107de7, type: 2}
-  m_sharedMaterial: {fileID: 3978908867597267023, guid: e4b73216d54137c4ebe70bfde3107de7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1413,7 +1413,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 3978908867597267023, guid: e4b73216d54137c4ebe70bfde3107de7, type: 2}
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1864,6 +1864,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1272180240}
+    - target: {fileID: 5423911823565674426, guid: 08335cfd854292d4ab8ea922529b4d8a, type: 3}
+      propertyPath: shardRadius
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8799131506371132832, guid: 08335cfd854292d4ab8ea922529b4d8a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.419
@@ -1904,7 +1908,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5423911823565674426, guid: 08335cfd854292d4ab8ea922529b4d8a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -3165,8 +3170,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: W,A,S,D to move
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e4b73216d54137c4ebe70bfde3107de7, type: 2}
-  m_sharedMaterial: {fileID: 3978908867597267023, guid: e4b73216d54137c4ebe70bfde3107de7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3260,7 +3265,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 3978908867597267023, guid: e4b73216d54137c4ebe70bfde3107de7, type: 2}
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3611,8 +3616,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e4b73216d54137c4ebe70bfde3107de7, type: 2}
-  m_sharedMaterial: {fileID: 3978908867597267023, guid: e4b73216d54137c4ebe70bfde3107de7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3706,7 +3711,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 3978908867597267023, guid: e4b73216d54137c4ebe70bfde3107de7, type: 2}
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

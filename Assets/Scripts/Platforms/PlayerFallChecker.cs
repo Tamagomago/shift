@@ -2,6 +2,18 @@ using UnityEngine;
 
 public class PlayerFallChecker : MonoBehaviour
 {
+    private AudioSource _asrc;
+    [SerializeField] private AudioClip onTriggerSfx;
+    void Awake()
+    {
+        _asrc = GetComponent<AudioSource>();
+        if (_asrc == null)
+        {
+            Debug.Log("No AudioSource component found.");
+            return;
+        }
+        _asrc.playOnAwake = false;
+    }
     // Reset the player back to the level spawn
     private void OnTriggerEnter(Collider other) {
         Debug.Log($"Trigger entered by: {other.name}");
@@ -13,6 +25,11 @@ public class PlayerFallChecker : MonoBehaviour
                 return;
             }
 
+            if (_asrc != null && onTriggerSfx != null)
+            {
+                _asrc.PlayOneShot(onTriggerSfx);
+            }
+            
             Debug.Log("Respawning...");
             player.StartCoroutine(player.Respawn());
         }

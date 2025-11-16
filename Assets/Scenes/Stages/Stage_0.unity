@@ -2637,10 +2637,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kael (Main Character)
       objectReference: {fileID: 0}
-    - target: {fileID: 100080496332723281, guid: 42e967b51de740940beae5a9a31a489d, type: 3}
-      propertyPath: m_CapsuleColliders.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 742698969131389042, guid: 42e967b51de740940beae5a9a31a489d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.79
@@ -2680,6 +2676,18 @@ PrefabInstance:
     - target: {fileID: 742698969131389042, guid: 42e967b51de740940beae5a9a31a489d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5146774907840883723, guid: 42e967b51de740940beae5a9a31a489d, type: 3}
+      propertyPath: jumpForce
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5146774907840883723, guid: 42e967b51de740940beae5a9a31a489d, type: 3}
+      propertyPath: respawnDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5146774907840883723, guid: 42e967b51de740940beae5a9a31a489d, type: 3}
+      propertyPath: fallMultiplier
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

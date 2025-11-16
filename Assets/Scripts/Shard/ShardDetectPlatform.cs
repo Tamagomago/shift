@@ -45,14 +45,8 @@ public class ShardDetectPlatform : MonoBehaviour
     {
         Color finalColor = emissionColor * intensity;
         _shardMaterial.SetColor(EmissionColorID, finalColor);
-        string result = hasNearbyPlatforms ? "Player is near a platform" : "No platform nearby player.";
-        Debug.Log(result);
-    }
-
-    private void SetEmission(float intensity)
-    {
-        Color finalColor = emissionColor * intensity;
-        _shardMaterial.SetColor(EmissionColorID, finalColor);
+        // string result = hasNearbyPlatforms ? "Player is near a platform" : "No platform nearby player.";
+        // Debug.Log(result);
     }
 
     private bool CheckNearbyPlatforms(GameObject[] realmPlatforms)

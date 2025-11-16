@@ -1,49 +1,55 @@
 using UnityEngine;
 using UnityEngine.Video;
-using UnityEngine.SceneManagement;
 
 public class StageCutsceneManager : MonoBehaviour
 {
     public VideoPlayer videoPlayer;
-    public string stageKey; // e.g. "Stage1_CutscenePlayed"
-    public string nextSceneName; // e.g. "Stage1_Main"
+    public string stageKey; // e.g. "Stage_0_cs"
+
+    private bool isDone = false; // Prevents skip/end from running twice
 
     void Start()
     {
-        if (PlayerPrefs.GetInt(stageKey, 0) == 0)
+        videoPlayer.playOnAwake = false;
+
+        if (PlayerPrefs.GetInt(stageKey, 0) == 1)
         {
-            // Play the cutscene for the first time
-            videoPlayer.loopPointReached += OnCutsceneEnd;
-            videoPlayer.Play();
+            // We've seen this cutscene. Destroy this object immediately.
+            Destroy(gameObject);
         }
         else
         {
-            // Skip directly to stage
-            LoadStage();
+            // First time. Pause the game and play the cutscene.
+            Time.timeScale = 0f; // Pauses all "Game Time" physics and Update loops
+            videoPlayer.loopPointReached += HandleCutsceneEnd;
+            videoPlayer.Play();
         }
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Escape))
+        // Check if the video is playing (to avoid skipping after it's done)
+        if (videoPlayer.isPlaying && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Escape)))
         {
-            videoPlayer.Stop();
-            OnCutsceneEnd(videoPlayer);
+            HandleCutsceneEnd(videoPlayer);
         }
     }
 
-
-    void OnCutsceneEnd(VideoPlayer vp)
+    void HandleCutsceneEnd(VideoPlayer vp)
     {
+        // --- FIX: Prevent this from running more than once ---
+        if (isDone) return;
+        isDone = true;
+
+        // Unsubscribe from the event
+        videoPlayer.loopPointReached -= HandleCutsceneEnd;
+
         // Mark as watched
         PlayerPrefs.SetInt(stageKey, 1);
-        PlayerPrefs.Save();
 
-        LoadStage();
-    }
-
-    void LoadStage()
-    {
-        SceneManager.LoadScene(nextSceneName);
+        // --- THIS IS THE MAIN FIX ---
+        // Unpause the game and destroy the cutscene object.
+        Time.timeScale = 1f;
+        Destroy(gameObject);
     }
 }

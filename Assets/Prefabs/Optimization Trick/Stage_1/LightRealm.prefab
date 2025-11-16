@@ -606,7 +606,7 @@ GameObject:
   - component: {fileID: 1864693492383967657}
   m_Layer: 0
   m_Name: floating platform (2)
-  m_TagString: Untagged
+  m_TagString: LightRealm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -863,7 +863,7 @@ GameObject:
   - component: {fileID: 8614522526617288494}
   m_Layer: 0
   m_Name: path (3)
-  m_TagString: Untagged
+  m_TagString: LightRealm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -971,7 +971,7 @@ GameObject:
   - component: {fileID: 965109599160327472}
   m_Layer: 0
   m_Name: path (2)
-  m_TagString: Untagged
+  m_TagString: LightRealm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1079,7 +1079,7 @@ GameObject:
   - component: {fileID: 6807322352327319815}
   m_Layer: 0
   m_Name: stairs (2)
-  m_TagString: Untagged
+  m_TagString: LightRealm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1188,7 +1188,7 @@ GameObject:
   - component: {fileID: 2497284528718379816}
   m_Layer: 0
   m_Name: stairs (1)
-  m_TagString: Untagged
+  m_TagString: LightRealm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1297,7 +1297,7 @@ GameObject:
   - component: {fileID: 4822696823840705530}
   m_Layer: 0
   m_Name: stairs (3)
-  m_TagString: Untagged
+  m_TagString: LightRealm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1808,7 +1808,7 @@ GameObject:
   - component: {fileID: 8997678552316755302}
   m_Layer: 0
   m_Name: path (5)
-  m_TagString: Untagged
+  m_TagString: LightRealm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2250,7 +2250,7 @@ GameObject:
   - component: {fileID: 6293050855721726269}
   m_Layer: 0
   m_Name: path (4)
-  m_TagString: Untagged
+  m_TagString: LightRealm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2568,7 +2568,7 @@ GameObject:
   - component: {fileID: 6598282941120908452}
   m_Layer: 0
   m_Name: path (1)
-  m_TagString: Untagged
+  m_TagString: LightRealm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2871,7 +2871,7 @@ GameObject:
   - component: {fileID: 619717121687756307}
   m_Layer: 0
   m_Name: stairs
-  m_TagString: Untagged
+  m_TagString: LightRealm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2980,7 +2980,7 @@ GameObject:
   - component: {fileID: 2639475066063417062}
   m_Layer: 0
   m_Name: path
-  m_TagString: Untagged
+  m_TagString: LightRealm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3758,7 +3758,7 @@ GameObject:
   - component: {fileID: 8584526566658531163}
   m_Layer: 0
   m_Name: floating platform
-  m_TagString: Untagged
+  m_TagString: LightRealm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4096,7 +4096,7 @@ GameObject:
   - component: {fileID: 441453882902053657}
   m_Layer: 0
   m_Name: floating platform (1)
-  m_TagString: Untagged
+  m_TagString: LightRealm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5000,7 +5000,7 @@ GameObject:
   - component: {fileID: 89030375746645438}
   m_Layer: 0
   m_Name: path (6)
-  m_TagString: Untagged
+  m_TagString: LightRealm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

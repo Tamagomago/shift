@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 5540969257518688475}
   m_Layer: 0
   m_Name: floating platform (3)
-  m_TagString: Untagged
+  m_TagString: DarkRealm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -388,7 +388,7 @@ GameObject:
   - component: {fileID: 4619958665398291661}
   m_Layer: 0
   m_Name: stairs (6)
-  m_TagString: Untagged
+  m_TagString: DarkRealm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10824,7 +10824,7 @@ GameObject:
   - component: {fileID: 1162866952257416933}
   m_Layer: 0
   m_Name: path (11)
-  m_TagString: Untagged
+  m_TagString: DarkRealm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11665,7 +11665,7 @@ GameObject:
   - component: {fileID: 2293713762307228122}
   m_Layer: 0
   m_Name: path (4)
-  m_TagString: Untagged
+  m_TagString: DarkRealm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16642,7 +16642,7 @@ GameObject:
   - component: {fileID: 3952006731549179434}
   m_Layer: 0
   m_Name: floating platform (3)
-  m_TagString: Untagged
+  m_TagString: DarkRealm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26617,7 +26617,7 @@ GameObject:
   - component: {fileID: 3684479209601326235}
   m_Layer: 0
   m_Name: stairs (4)
-  m_TagString: Untagged
+  m_TagString: DarkRealm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31883,7 +31883,7 @@ GameObject:
   - component: {fileID: 7326958454336305243}
   m_Layer: 0
   m_Name: path (12)
-  m_TagString: Untagged
+  m_TagString: DarkRealm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37858,7 +37858,7 @@ GameObject:
   - component: {fileID: 6010610073739309636}
   m_Layer: 0
   m_Name: stairs (5)
-  m_TagString: Untagged
+  m_TagString: DarkRealm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42800,7 +42800,7 @@ GameObject:
   - component: {fileID: 5182129086296548648}
   m_Layer: 0
   m_Name: path (10)
-  m_TagString: Untagged
+  m_TagString: DarkRealm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43508,7 +43508,7 @@ GameObject:
   - component: {fileID: 2407501410163263231}
   m_Layer: 0
   m_Name: stairs (7)
-  m_TagString: Untagged
+  m_TagString: DarkRealm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

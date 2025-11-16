@@ -3,8 +3,8 @@ using UnityEngine;
 public class ShardPlayerFollow : MonoBehaviour
 {
     [SerializeField] private Transform player;
-    [SerializeField] private Vector3 offset = new Vector3(0, 0, -0.7f); // Offset the shard to the top left of the player's shoulder
-    [SerializeField] private float followSpeed = 3f;
+    [SerializeField] private Vector3 offset = new Vector3(-0.1f, -2f, 0.65f); // Offset the shard to the top left of the player's shoulder
+    [SerializeField] private float followSpeed = 4f;
 
     // Expose player transform
     public Transform PlayerRef => player;

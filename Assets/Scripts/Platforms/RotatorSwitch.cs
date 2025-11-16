@@ -17,6 +17,10 @@ public class RotatorSwitch : MonoBehaviour
     public GameObject interactPopup;
     public Animator leverAnimator;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip activateSound;
+    [SerializeField] private AudioSource audioSource;
+
     private bool isActive = false;
     private bool isRotating = false;
     // Once set, this rotator will ignore further activations (per-instance guard)
@@ -79,6 +83,15 @@ public class RotatorSwitch : MonoBehaviour
         isActive = true;
         isRotating = true;
         hasActivatedOnce = true;
+
+        // --- PLAY SOUND ---
+        if (activateSound != null)
+        {
+            if (audioSource != null)
+                audioSource.PlayOneShot(activateSound);
+            else
+                AudioSource.PlayClipAtPoint(activateSound, transform.position);
+        }
 
         Debug.Log($"RotatorSwitch '{name}' activated by {(activator != null ? activator.name : "direct interaction")} - instance locked: {hasActivatedOnce}");
 

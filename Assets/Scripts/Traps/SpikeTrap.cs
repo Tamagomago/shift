@@ -12,6 +12,11 @@ public class SpikeTrap : MonoBehaviour
     [Header("Player Tag")]
     public string playerTag = "Player";
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip spikesUpSound;
+    [SerializeField] private AudioClip spikesDownSound;
+    [SerializeField] private AudioSource audioSource;
+
     private void Awake()
     {
         // Get references in Awake, as it's always called first
@@ -61,6 +66,16 @@ public class SpikeTrap : MonoBehaviour
         if (spikeCollider != null)
         {
             spikeCollider.enabled = spikesUp;
+        }
+
+            // --- PLAY SOUND ---
+        AudioClip clipToPlay = spikesUp ? spikesUpSound : spikesDownSound;
+        if (clipToPlay != null)
+        {
+            if (audioSource != null)
+                audioSource.PlayOneShot(clipToPlay);
+            else
+                AudioSource.PlayClipAtPoint(clipToPlay, transform.position);
         }
         
         Debug.Log("Spike state changed. Spikes up? " + spikesUp);

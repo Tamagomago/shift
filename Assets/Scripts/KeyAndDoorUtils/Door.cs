@@ -15,6 +15,11 @@ public class Door : MonoBehaviour
     [Header("Animation")]
     [SerializeField] private float disappearDuration = 1.5f;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip lockedSound;
+    [SerializeField] private AudioClip openSound;
+    [SerializeField] private AudioSource audioSource; // optional
+
     // You can add locked sounds, open sounds, etc. here
     // [SerializeField] private AudioClip lockedSound;
     // [SerializeField] private AudioClip openSound;
@@ -52,6 +57,8 @@ public class Door : MonoBehaviour
             {
                 interactionTrigger.enabled = false;
             }
+
+            PlaySound(openSound);
             
             // 4. Play open sound
             // if (openSound != null) AudioSource.PlayClipAtPoint(openSound, transform.position);
@@ -65,8 +72,19 @@ public class Door : MonoBehaviour
             Debug.Log("Door is locked. Requires: " + requiredLightKeys + " Light, " + requiredDarkKeys + " Dark.");
             
             // Play locked sound
+            PlaySound(lockedSound);
             // if (lockedSound != null) AudioSource.PlayClipAtPoint(lockedSound, transform.position);
         }
+    }
+
+    private void PlaySound(AudioClip clip)
+    {
+        if (clip == null) return;
+
+        if (audioSource != null)
+            audioSource.PlayOneShot(clip);
+        else
+            AudioSource.PlayClipAtPoint(clip, transform.position);
     }
 
     private IEnumerator OpenDoorSmoothly()

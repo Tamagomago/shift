@@ -11,6 +11,12 @@ public class DimensionManager : MonoBehaviour
 
     public ToggleDimension ToggleDimensionRef => _toggleDimension; // Give access to other scripts later on
 
+    [Header("Audio Settings")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip switchSound;
+    [Range(0f, 1f)]
+    [SerializeField] private float switchVolume = 1f;
+
     void Awake()
     {
         // Get the ToggleDimension script for access later
@@ -23,6 +29,19 @@ public class DimensionManager : MonoBehaviour
         }
 
         CurrentSceneDimension = _toggleDimension.IsLightRealmActive;
+    }
+
+    public void PlaySwitchSound()
+    {
+        if (audioSource == null)
+        {
+            // Create a default AudioSource on the same GameObject
+            audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.playOnAwake = false;
+        }
+
+        if (switchSound != null)
+            audioSource.PlayOneShot(switchSound, switchVolume);
     }
 
     void Start()

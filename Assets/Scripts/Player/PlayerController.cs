@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
         _anim.SetBool("isGrounded", isGrounded);
 
         // Reset _hasJumped on landing
-        if (isGrounded && _hasJumped)
+        if (isGrounded && _hasJumped && _verticalVelocity < -fallThreshold)
         {
             _hasJumped = false;
         }
@@ -229,9 +229,9 @@ public class PlayerController : MonoBehaviour
         Vector3 moveDir = (forwardIso * _input.z + rightIso * _input.x).normalized;
 
         // If the player is grounded, apply small velocity, else apply gravity 
-        if (_characterController.isGrounded && !_hasJumped)
+        if (_characterController.isGrounded && _verticalVelocity < 0.0f)
         {
-            _verticalVelocity = -2f;
+            _verticalVelocity = -2f; // Clamp to ground, reset velocity on land
         }
         else
         {
@@ -253,7 +253,18 @@ public class PlayerController : MonoBehaviour
         if (_currentPlatform != null)
         {
             Vector3 platformDeltaPos = (_currentPlatform.position - _platformLastPosition) / Time.deltaTime;
-            velocity += platformDeltaPos;
+            // We only want to add the platform's Y movement if we are grounded on it
+            // and not jumping off it.
+            if (_characterController.isGrounded)
+            {
+                velocity += platformDeltaPos;
+            }
+            else
+            {
+                // If in the air, only apply horizontal platform movement
+                velocity.x += platformDeltaPos.x;
+                velocity.z += platformDeltaPos.z;
+            }
             _platformLastPosition = _currentPlatform.position;
         }
         

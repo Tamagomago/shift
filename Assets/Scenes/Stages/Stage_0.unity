@@ -1570,7 +1570,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1008318757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1585,7 +1585,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   videoPlayer: {fileID: 1008318758}
   stageKey: stage_0_cs
-  nextSceneName: Stage_0
 --- !u!328 &1008318758
 VideoPlayer:
   m_ObjectHideFlags: 0
@@ -1605,7 +1604,7 @@ VideoPlayer:
   m_RenderMode: 1
   m_AspectRatio: 3
   m_DataSource: 0
-  m_TimeUpdateMode: 1
+  m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
   m_TargetAudioSources:
@@ -1616,7 +1615,7 @@ VideoPlayer:
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_SkipOnDrop: 1
   m_Looping: 0
   m_WaitForFirstFrame: 1
@@ -2991,12 +2990,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 506875576780323142, guid: 0cedeaf9b35634c99bf57166c99d429a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 340245344851049018, guid: 0cedeaf9b35634c99bf57166c99d429a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 0cedeaf9b35634c99bf57166c99d429a, type: 3}
 --- !u!23 &1711813854345664524
 MeshRenderer:
@@ -3339,6 +3341,10 @@ PrefabInstance:
     - target: {fileID: 2094557659925997888, guid: b3ae52578b7dc4719bc378913f6417e9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7539942632652145422, guid: b3ae52578b7dc4719bc378913f6417e9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.095
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

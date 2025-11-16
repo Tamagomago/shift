@@ -355,7 +355,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7954101683159239918, guid: 2b9ffe78451474fb59d0d01fd66f1eec, type: 3}
       propertyPath: orthographic size
-      value: 13.63
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1688,6 +1688,10 @@ PrefabInstance:
     - target: {fileID: 742698969131389042, guid: 42e967b51de740940beae5a9a31a489d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3966355619897668162, guid: 42e967b51de740940beae5a9a31a489d, type: 3}
+      propertyPath: m_SkinWidth
+      value: 0.001
       objectReference: {fileID: 0}
     - target: {fileID: 5146774907840883723, guid: 42e967b51de740940beae5a9a31a489d, type: 3}
       propertyPath: jumpForce

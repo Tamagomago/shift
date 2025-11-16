@@ -2568,17 +2568,13 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1618218166}
-    - target: {fileID: 894031238330053263, guid: f51172fa4d6e25946a1d4bad96c6efa3, type: 3}
-      propertyPath: offset.x
-      value: -0.1
+    - target: {fileID: 1810285754510489754, guid: f51172fa4d6e25946a1d4bad96c6efa3, type: 3}
+      propertyPath: emissionColor.g
+      value: 0.8518007
       objectReference: {fileID: 0}
-    - target: {fileID: 894031238330053263, guid: f51172fa4d6e25946a1d4bad96c6efa3, type: 3}
-      propertyPath: offset.y
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 894031238330053263, guid: f51172fa4d6e25946a1d4bad96c6efa3, type: 3}
-      propertyPath: offset.z
-      value: 0.65
+    - target: {fileID: 1810285754510489754, guid: f51172fa4d6e25946a1d4bad96c6efa3, type: 3}
+      propertyPath: emissionColor.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4942135779856679862, guid: f51172fa4d6e25946a1d4bad96c6efa3, type: 3}
       propertyPath: m_Name
@@ -2861,6 +2857,10 @@ PrefabInstance:
     - target: {fileID: 7438953844980821507, guid: 2b9ffe78451474fb59d0d01fd66f1eec, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7954101683159239918, guid: 2b9ffe78451474fb59d0d01fd66f1eec, type: 3}
+      propertyPath: orthographic size
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3982,6 +3982,14 @@ PrefabInstance:
     - target: {fileID: 742698969131389042, guid: 42e967b51de740940beae5a9a31a489d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3966355619897668162, guid: 42e967b51de740940beae5a9a31a489d, type: 3}
+      propertyPath: m_SkinWidth
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3966355619897668162, guid: 42e967b51de740940beae5a9a31a489d, type: 3}
+      propertyPath: m_StepOffset
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5146774907840883723, guid: 42e967b51de740940beae5a9a31a489d, type: 3}
       propertyPath: jumpForce
@@ -5801,14 +5809,6 @@ PrefabInstance:
     - target: {fileID: 448291625722858060, guid: ca874e100341f814d82e85f4ec39e9d9, type: 3}
       propertyPath: m_Name
       value: Player Fall Check
-      objectReference: {fileID: 0}
-    - target: {fileID: 5096885327170889305, guid: ca874e100341f814d82e85f4ec39e9d9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 21.91
-      objectReference: {fileID: 0}
-    - target: {fileID: 5096885327170889305, guid: ca874e100341f814d82e85f4ec39e9d9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 17.71
       objectReference: {fileID: 0}
     - target: {fileID: 5096885327170889305, guid: ca874e100341f814d82e85f4ec39e9d9, type: 3}
       propertyPath: m_LocalPosition.x

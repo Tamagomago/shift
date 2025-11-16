@@ -28,7 +28,6 @@ public class ShardDetectPlatform : MonoBehaviour
             Debug.LogWarning("DimensionManager or ShardPlayerFollow is not found in the Shard GameObject!");
             return;
         }
-
         SetEmission(baseEmissionIntensity);
     }
 
@@ -38,15 +37,16 @@ public class ShardDetectPlatform : MonoBehaviour
         GameObject[] realmToCheck = _dimensionManager.GetOppositeRealmPlatforms();
         bool hasNearbyPlatforms = CheckNearbyPlatforms(realmToCheck);
 
-        // TODO ADD GLOW EFFECT HERE:
-        if (hasNearbyPlatforms)
-        {
-            SetEmission(glowingEmissionIntensity);
-        }
-        else
-        {
-            SetEmission(baseEmissionIntensity);
-        }
+        float intensityToApply = hasNearbyPlatforms ? glowingEmissionIntensity : baseEmissionIntensity;
+        SetEmission(intensityToApply);
+    }
+
+    private void SetEmission(float intensity)
+    {
+        Color finalColor = emissionColor * intensity;
+        _shardMaterial.SetColor(EmissionColorID, finalColor);
+        string result = hasNearbyPlatforms ? "Player is near a platform" : "No platform nearby player.";
+        Debug.Log(result);
     }
 
     private void SetEmission(float intensity)

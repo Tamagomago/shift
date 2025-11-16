@@ -13,6 +13,10 @@ public class EnemyPatrol3D : MonoBehaviour
     [Header("Chase Config")]
     [SerializeField] private float chaseRange = 5f;
     [SerializeField] private float loseRange = 25f;
+
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip attackSound;
     
     private Transform _player;
     private DimensionManager _dimensionManager;
@@ -123,6 +127,10 @@ public class EnemyPatrol3D : MonoBehaviour
     {
         if (other.CompareTag("Player") && _playerController != null)
         {
+            if (audioSource != null && attackSound != null)
+            {
+                AudioSource.PlayClipAtPoint(attackSound, transform.position);
+            }
             if (_dimensionManager != null && _dimensionManager.ToggleDimensionRef != null)
             {
                 _dimensionManager.ToggleDimensionRef.SwitchRealm();

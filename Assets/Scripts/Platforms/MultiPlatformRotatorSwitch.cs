@@ -17,6 +17,10 @@ public class MultiPlatformRotatorSwitch : MonoBehaviour
     public GameObject interactPopup;
     public Animator leverAnimator;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip activateSound;
+    [SerializeField] private AudioSource audioSource;
+
     private bool isActive = false;
     private bool isRotating = false;
     private List<Quaternion> targetRotations = new List<Quaternion>();
@@ -67,6 +71,15 @@ public class MultiPlatformRotatorSwitch : MonoBehaviour
         {
             if (platformsToRotate[i] == null) continue;
             targetRotations[i] = platformsToRotate[i].rotation * Quaternion.Euler(rotationIncrement);
+        }
+
+        // --- PLAY SOUND ---
+        if (activateSound != null)
+        {
+            if (audioSource != null)
+                audioSource.PlayOneShot(activateSound);
+            else
+                AudioSource.PlayClipAtPoint(activateSound, transform.position);
         }
 
         Debug.Log($"MultiPlatformRotatorSwitch '{name}' activated by {(activator != null ? activator.name : "direct interaction")}.");

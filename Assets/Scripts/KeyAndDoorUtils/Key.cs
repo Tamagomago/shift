@@ -13,6 +13,11 @@ public class Key : MonoBehaviour
     [Header("Animation")]
     [SerializeField] private float disappearDuration = 0.5f;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip collectSound;
+    [SerializeField] private AudioSource audioSource;
+
+
     private bool _isCollected = false;
 
     private void OnTriggerEnter(Collider other)
@@ -40,6 +45,14 @@ public class Key : MonoBehaviour
 
             // 1. Tell the player to add this key
             player.AddKey(keyType);
+
+            if (collectSound != null)
+            {
+                if (audioSource != null)
+                    audioSource.PlayOneShot(collectSound);
+                else
+                    AudioSource.PlayClipAtPoint(collectSound, transform.position);
+            }
 
             // 2. Start the collection coroutine (particles + animation)
             StartCoroutine(CollectAndDisappear());

@@ -12,6 +12,12 @@ public class Switch : MonoBehaviour
     public Animator leverAnimator; 
     private bool isActive = false; // Tracks the current state
 
+        // --- AUDIO ---
+    [Header("Audio")]
+    [SerializeField] private AudioClip activateSound;
+    [SerializeField] private AudioSource audioSource;
+
+
     void Start()
     {
         // ++ ADDED: It's good practice to ensure the popup is hidden when the game starts.
@@ -26,6 +32,15 @@ public class Switch : MonoBehaviour
     {
         // Toggle the switch every time the player activates it
         isActive = !isActive;
+
+        // Play sound on activation
+        if (activateSound != null)
+        {
+            if (audioSource != null)
+                audioSource.PlayOneShot(activateSound);
+            else
+                AudioSource.PlayClipAtPoint(activateSound, transform.position);
+        }
 
         // Trigger the platform movement
         if (platformToActivate != null)

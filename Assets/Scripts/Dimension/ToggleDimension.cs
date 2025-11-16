@@ -14,6 +14,7 @@ public class ToggleDimension : MonoBehaviour
     [Header("Transition Settings")]
     public float transitionDuration = 0.5f; 
     public string dissolvePropertyName = "_Dissolve";
+    private DimensionManager _dimensionManager;
 
     // Track which realm is currently active
     public bool IsLightRealmActive { get; private set; } = true;
@@ -53,6 +54,8 @@ public class ToggleDimension : MonoBehaviour
 
     private void Start()
     {
+        _dimensionManager = FindFirstObjectByType<DimensionManager>();
+
         // Find PlayerController to toggle respawn later
         _playerController = GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerController>();
         if (_playerController == null)
@@ -95,6 +98,8 @@ public class ToggleDimension : MonoBehaviour
             Debug.LogWarning("ToggleDimension: Realms are not assigned!");
             return;
         }
+            
+        _dimensionManager?.PlaySwitchSound();
 
         // Handle external-defined realm switch (player or enemy)
         IsLightRealmActive = targetRealm ?? !IsLightRealmActive;

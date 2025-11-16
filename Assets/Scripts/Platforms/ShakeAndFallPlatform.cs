@@ -27,6 +27,10 @@ public class ShakeAndFallPlatform : MonoBehaviour
     [SerializeField, Tooltip("If true, the platform's collider will be disabled when it starts falling to avoid physics overlaps.")]
     private bool disableCollisionsOnFall = true;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip shakeSound;    
+    [SerializeField] private AudioSource audioSource;  // optional AudioSource
+
     // --- state tracking to survive disable/enable ---
     private enum PlatformState { Idle, Shaking, Falling, Finished }
     private PlatformState state = PlatformState.Idle;
@@ -62,13 +66,25 @@ public class ShakeAndFallPlatform : MonoBehaviour
         {
             Debug.Log("Player triggered ShakeAndFallPlatform.");
             // mark that we've started the sequence
+            PlayShakeSound();
             state = PlatformState.Shaking;
             // initialize preserved values
             shakeElapsed = 0f;
             fallElapsed = 0f;
             fallVelocity = fallInitialSpeed;
+
+            
             StartSequenceIfNeeded();
         }
+    }
+    private void PlayShakeSound()
+    {
+        if (shakeSound == null) return;
+
+        if (audioSource != null)
+            audioSource.PlayOneShot(shakeSound);
+        else
+            AudioSource.PlayClipAtPoint(shakeSound, transform.position);
     }
 
     private void OnEnable()

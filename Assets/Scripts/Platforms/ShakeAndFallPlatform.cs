@@ -137,6 +137,36 @@ public class ShakeAndFallPlatform : MonoBehaviour
         // done
         state = PlatformState.Finished;
         sequenceCoroutineRunning = false;
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
+
+    public void ResetPlatform()
+    {
+        // Stop any running sequence
+        StopAllCoroutines();
+        sequenceCoroutineRunning = false;
+
+        // Reset transform
+        transform.position = originalPosition;
+
+        // Reset collider
+        if (platformCollider != null)
+            platformCollider.enabled = true;
+
+        // Reset Rigidbody (if any)
+        if (rb != null)
+        {
+            rb.isKinematic = true;
+            rb.useGravity = false;
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+
+        // Reset state machine
+        state = PlatformState.Idle;
+        shakeElapsed = 0f;
+        fallElapsed = 0f;
+        fallVelocity = fallInitialSpeed;
+    }
+
 }

@@ -604,7 +604,6 @@ GameObject:
   - component: {fileID: 61755569982261375}
   - component: {fileID: 7065886029618796371}
   - component: {fileID: 1864693492383967657}
-  - component: {fileID: 1629662600694434895}
   m_Layer: 0
   m_Name: floating platform (2)
   m_TagString: Untagged
@@ -740,33 +739,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5.0917673, y: 3.7268696, z: 3.360962}
   m_Center: {x: 0.00031387806, y: 0.1, z: -0.00006556511}
---- !u!54 &1629662600694434895
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 358085415678465034}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &437693243493593378
 GameObject:
   m_ObjectHideFlags: 0
@@ -3776,7 +3748,6 @@ GameObject:
   - component: {fileID: 399914793408501348}
   - component: {fileID: 8908356239240349766}
   - component: {fileID: 8584526566658531163}
-  - component: {fileID: 576012679325732027}
   m_Layer: 0
   m_Name: floating platform
   m_TagString: Untagged
@@ -3912,33 +3883,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5.0917673, y: 3.7268696, z: 3.360962}
   m_Center: {x: 0.00031387806, y: 0.1, z: -0.00006556511}
---- !u!54 &576012679325732027
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6665763647229758764}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &6800326200863699984
 GameObject:
   m_ObjectHideFlags: 0

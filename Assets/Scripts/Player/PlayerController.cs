@@ -286,5 +286,12 @@ public class PlayerController : MonoBehaviour
         transform.position = _initialPos;
         _characterController.enabled = true;
 
+        // ---- RESET PLATFORMS ----
+    foreach (var platform in FindObjectsByType<ShakeAndFallPlatform>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+    {
+        platform.gameObject.SetActive(true); // This reactivates the fallen platform
+        platform.ResetPlatform(); // This resets its position and state
+        Debug.Log("Resetting platform: " + platform.name);
+    }
     }
 }

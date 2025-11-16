@@ -5148,6 +5148,8 @@ MonoBehaviour:
   rotationSpeed: 2
   interactPopup: {fileID: 0}
   leverAnimator: {fileID: 7194288787344771110}
+  activateSound: {fileID: 8300000, guid: 5b7f0cb951e4542cd89b461d9d9ea25e, type: 3}
+  audioSource: {fileID: 0}
 --- !u!1 &755918657158443440
 GameObject:
   m_ObjectHideFlags: 0
@@ -5249,7 +5251,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1216211851392628532
 Transform:
   m_ObjectHideFlags: 0
@@ -6149,6 +6151,8 @@ MonoBehaviour:
   rotationSpeed: 2
   interactPopup: {fileID: 0}
   leverAnimator: {fileID: 5119133018862846477}
+  activateSound: {fileID: 8300000, guid: 5b7f0cb951e4542cd89b461d9d9ea25e, type: 3}
+  audioSource: {fileID: 0}
 --- !u!1 &3578272038449627471
 GameObject:
   m_ObjectHideFlags: 0
@@ -8338,6 +8342,8 @@ MonoBehaviour:
   keyType: 1
   collectParticles: {fileID: 0}
   disappearDuration: 0.5
+  collectSound: {fileID: 8300000, guid: 9c63b856d87d349528852db675007099, type: 3}
+  audioSource: {fileID: 0}
 --- !u!1001 &813290059623479321
 PrefabInstance:
   m_ObjectHideFlags: 0

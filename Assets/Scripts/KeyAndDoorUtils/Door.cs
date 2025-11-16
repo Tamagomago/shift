@@ -130,4 +130,10 @@ public class Door : MonoBehaviour
             player.ClearCurrentDoor(this);
         }
     }
+    
+    // Return a pair of values required to access the next scene
+    public int[] GetRequiredDimensionKeys()
+    {
+        return new int[] { requiredLightKeys, requiredDarkKeys };
+    }
 }

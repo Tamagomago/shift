@@ -51,10 +51,15 @@ public class ShardDetectPlatform : MonoBehaviour
 
     private bool CheckNearbyPlatforms(GameObject[] realmPlatforms)
     {
+        // Loop through all platforms in the specified realm
         foreach (GameObject platform in realmPlatforms) {
-            float distance = Vector3.Distance(_shardPlayerFollow.PlayerRef.position, platform.transform.position);
+            float distance = Vector3.Distance(transform.position, platform.transform.position);
+            
+            // If any platform is within the radius, return true immediately
             if (distance <= shardRadius) return true;
         }
+        
+        // If the loop finishes without finding a nearby platform, return false
         return false;
     }
 }

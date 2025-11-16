@@ -717,7 +717,9 @@ MonoBehaviour:
   shakeMagnitude: 0.1
   fallInitialSpeed: 1
   fallAcceleration: 9.81
-  disableCollisionsOnFall: 1
+  disableCollisionsOnFall: 0
+  shakeSound: {fileID: 8300000, guid: 0f72c49bb99d245d585c696bb7c0295f, type: 3}
+  audioSource: {fileID: 0}
 --- !u!65 &1864693492383967657
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -738,7 +740,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 5.0917673, y: 3.7268696, z: 3.360962}
-  m_Center: {x: 0.00031387806, y: 0.1, z: -0.00006556511}
+  m_Center: {x: 0.00031387806, y: 1, z: -0.00006556511}
 --- !u!1 &437693243493593378
 GameObject:
   m_ObjectHideFlags: 0
@@ -1624,6 +1626,8 @@ MonoBehaviour:
   keyType: 0
   collectParticles: {fileID: 0}
   disappearDuration: 0.5
+  collectSound: {fileID: 8300000, guid: 9c63b856d87d349528852db675007099, type: 3}
+  audioSource: {fileID: 0}
 --- !u!1 &2775687679611026204
 GameObject:
   m_ObjectHideFlags: 0
@@ -2141,6 +2145,8 @@ MonoBehaviour:
   rotatorToActivate: {fileID: 0}
   interactPopup: {fileID: 6142840961220580790}
   leverAnimator: {fileID: 9171004726485000907}
+  activateSound: {fileID: 8300000, guid: 5b7f0cb951e4542cd89b461d9d9ea25e, type: 3}
+  audioSource: {fileID: 0}
 --- !u!95 &9171004726485000907
 Animator:
   serializedVersion: 7
@@ -3713,6 +3719,8 @@ MonoBehaviour:
   rotatorToActivate: {fileID: 0}
   interactPopup: {fileID: 0}
   leverAnimator: {fileID: 0}
+  activateSound: {fileID: 0}
+  audioSource: {fileID: 0}
 --- !u!65 &7950642714610599618
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3861,7 +3869,9 @@ MonoBehaviour:
   shakeMagnitude: 0.1
   fallInitialSpeed: 1
   fallAcceleration: 9.81
-  disableCollisionsOnFall: 1
+  disableCollisionsOnFall: 0
+  shakeSound: {fileID: 8300000, guid: 0f72c49bb99d245d585c696bb7c0295f, type: 3}
+  audioSource: {fileID: 0}
 --- !u!65 &8584526566658531163
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3882,7 +3892,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 5.0917673, y: 3.7268696, z: 3.360962}
-  m_Center: {x: 0.00031387806, y: 0.1, z: -0.00006556511}
+  m_Center: {x: 0.00031387806, y: 1, z: -0.00006556511}
 --- !u!1 &6800326200863699984
 GameObject:
   m_ObjectHideFlags: 0
@@ -4449,6 +4459,8 @@ MonoBehaviour:
   rotatorToActivate: {fileID: 0}
   interactPopup: {fileID: 6800326200863699984}
   leverAnimator: {fileID: 5752648227173941801}
+  activateSound: {fileID: 8300000, guid: 5b7f0cb951e4542cd89b461d9d9ea25e, type: 3}
+  audioSource: {fileID: 0}
 --- !u!95 &5752648227173941801
 Animator:
   serializedVersion: 7
@@ -4864,6 +4876,9 @@ MonoBehaviour:
   requiredDarkKeys: 1
   interactionTrigger: {fileID: 5805863283325365914}
   disappearDuration: 0.5
+  lockedSound: {fileID: 8300000, guid: 76684635f917c41f6bbf7fa6afd2b8a2, type: 3}
+  openSound: {fileID: 8300000, guid: a19aadfcd72db4168baf14af49fc0580, type: 3}
+  audioSource: {fileID: 0}
 --- !u!65 &5805863283325365914
 BoxCollider:
   m_ObjectHideFlags: 0

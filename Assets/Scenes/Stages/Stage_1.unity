@@ -3912,26 +3912,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 743688717521184073, guid: 3dc8d2ea2377e44f6affdb7760cff8a4, type: 3}
-      propertyPath: shakeSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 0f72c49bb99d245d585c696bb7c0295f, type: 3}
-    - target: {fileID: 743688717521184073, guid: 3dc8d2ea2377e44f6affdb7760cff8a4, type: 3}
-      propertyPath: disableCollisionsOnFall
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 939349472963529526, guid: 3dc8d2ea2377e44f6affdb7760cff8a4, type: 3}
       propertyPath: m_Name
       value: DarkRealm
       objectReference: {fileID: 0}
-    - target: {fileID: 3952006731549179434, guid: 3dc8d2ea2377e44f6affdb7760cff8a4, type: 3}
-      propertyPath: m_Center.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4057646901058505975, guid: 3dc8d2ea2377e44f6affdb7760cff8a4, type: 3}
-      propertyPath: collectSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 9c63b856d87d349528852db675007099, type: 3}
     - target: {fileID: 8655849828727153109, guid: 3dc8d2ea2377e44f6affdb7760cff8a4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.486764
@@ -4002,18 +3986,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 172122871028050229, guid: 7c65b16ec70ed48a2a24672cb083d401, type: 3}
-      propertyPath: collectSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 9c63b856d87d349528852db675007099, type: 3}
     - target: {fileID: 478688910775375589, guid: 7c65b16ec70ed48a2a24672cb083d401, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1544243835}
-    - target: {fileID: 1864693492383967657, guid: 7c65b16ec70ed48a2a24672cb083d401, type: 3}
-      propertyPath: m_Center.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2374873080283529273, guid: 7c65b16ec70ed48a2a24672cb083d401, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -4022,10 +3998,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: LightRealm
       objectReference: {fileID: 0}
-    - target: {fileID: 3649036934999894001, guid: 7c65b16ec70ed48a2a24672cb083d401, type: 3}
-      propertyPath: activateSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 5b7f0cb951e4542cd89b461d9d9ea25e, type: 3}
     - target: {fileID: 4459162185341429264, guid: 7c65b16ec70ed48a2a24672cb083d401, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.486764
@@ -4066,22 +4038,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4877297924213041429, guid: 7c65b16ec70ed48a2a24672cb083d401, type: 3}
-      propertyPath: activateSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 5b7f0cb951e4542cd89b461d9d9ea25e, type: 3}
     - target: {fileID: 5194013898038816193, guid: 7c65b16ec70ed48a2a24672cb083d401, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 226691887}
-    - target: {fileID: 7065886029618796371, guid: 7c65b16ec70ed48a2a24672cb083d401, type: 3}
-      propertyPath: shakeSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 0f72c49bb99d245d585c696bb7c0295f, type: 3}
-    - target: {fileID: 7065886029618796371, guid: 7c65b16ec70ed48a2a24672cb083d401, type: 3}
-      propertyPath: disableCollisionsOnFall
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7244423531147061962, guid: 7c65b16ec70ed48a2a24672cb083d401, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -4090,30 +4050,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 226691887}
-    - target: {fileID: 8012732839081460723, guid: 7c65b16ec70ed48a2a24672cb083d401, type: 3}
-      propertyPath: openSound
-      value: 
-      objectReference: {fileID: 8300000, guid: a19aadfcd72db4168baf14af49fc0580, type: 3}
-    - target: {fileID: 8012732839081460723, guid: 7c65b16ec70ed48a2a24672cb083d401, type: 3}
-      propertyPath: lockedSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 76684635f917c41f6bbf7fa6afd2b8a2, type: 3}
-    - target: {fileID: 8584526566658531163, guid: 7c65b16ec70ed48a2a24672cb083d401, type: 3}
-      propertyPath: m_Center.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8875081057581079469, guid: 7c65b16ec70ed48a2a24672cb083d401, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 2072766126}
-    - target: {fileID: 8908356239240349766, guid: 7c65b16ec70ed48a2a24672cb083d401, type: 3}
-      propertyPath: shakeSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 0f72c49bb99d245d585c696bb7c0295f, type: 3}
-    - target: {fileID: 8908356239240349766, guid: 7c65b16ec70ed48a2a24672cb083d401, type: 3}
-      propertyPath: disableCollisionsOnFall
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

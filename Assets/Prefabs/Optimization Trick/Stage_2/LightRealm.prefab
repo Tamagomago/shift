@@ -6577,6 +6577,8 @@ MonoBehaviour:
   keyType: 0
   collectParticles: {fileID: 0}
   disappearDuration: 0.5
+  collectSound: {fileID: 0}
+  audioSource: {fileID: 0}
 --- !u!1 &1245901537911174757
 GameObject:
   m_ObjectHideFlags: 0
@@ -7341,6 +7343,8 @@ MonoBehaviour:
   rotationSpeed: 2
   interactPopup: {fileID: 4181016417451921233}
   leverAnimator: {fileID: 8602789864881362429}
+  activateSound: {fileID: 8300000, guid: 5b7f0cb951e4542cd89b461d9d9ea25e, type: 3}
+  audioSource: {fileID: 0}
 --- !u!1 &2005708140120843353
 GameObject:
   m_ObjectHideFlags: 0
@@ -7466,6 +7470,8 @@ MonoBehaviour:
   keyType: 0
   collectParticles: {fileID: 0}
   disappearDuration: 0.5
+  collectSound: {fileID: 8300000, guid: 9c63b856d87d349528852db675007099, type: 3}
+  audioSource: {fileID: 0}
 --- !u!1 &2015836080008478092
 GameObject:
   m_ObjectHideFlags: 0
@@ -7726,6 +7732,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connectedTraps:
   - {fileID: 7040426502248224016}
+  pressSound: {fileID: 8300000, guid: 0e23d40a94e7841e3a415aeadf0c5487, type: 3}
+  releaseSound: {fileID: 8300000, guid: 82751ec3cfa3746f6974b7ac665a2ba2, type: 3}
+  audioSource: {fileID: 0}
 --- !u!95 &7546968117283157308
 Animator:
   serializedVersion: 7
@@ -8036,6 +8045,9 @@ MonoBehaviour:
   spikesUp: 1
   spikeCollider: {fileID: 5143701441988932740}
   playerTag: Player
+  spikesUpSound: {fileID: 8300000, guid: 94bb52d077fea4b7b8a2cea4e34a1c7e, type: 3}
+  spikesDownSound: {fileID: 8300000, guid: fbc0194f57cfa4b9b945d1fce6d129e2, type: 3}
+  audioSource: {fileID: 0}
 --- !u!95 &5385263006754246635
 Animator:
   serializedVersion: 7
@@ -9960,6 +9972,8 @@ MonoBehaviour:
   rotatorToActivate: {fileID: 0}
   interactPopup: {fileID: 7489675416888929754}
   leverAnimator: {fileID: 3334759807465004840}
+  activateSound: {fileID: 8300000, guid: 5b7f0cb951e4542cd89b461d9d9ea25e, type: 3}
+  audioSource: {fileID: 0}
 --- !u!1 &4157100903692123585
 GameObject:
   m_ObjectHideFlags: 0
@@ -10593,6 +10607,8 @@ MonoBehaviour:
   rotationSpeed: 2
   interactPopup: {fileID: 2015836080008478092}
   leverAnimator: {fileID: 2483546451542844768}
+  activateSound: {fileID: 8300000, guid: 5b7f0cb951e4542cd89b461d9d9ea25e, type: 3}
+  audioSource: {fileID: 0}
 --- !u!1 &4742393052240176477
 GameObject:
   m_ObjectHideFlags: 0
@@ -16555,6 +16571,9 @@ MonoBehaviour:
   spikesUp: 0
   spikeCollider: {fileID: 8777519599259480550}
   playerTag: Player
+  spikesUpSound: {fileID: 8300000, guid: 94bb52d077fea4b7b8a2cea4e34a1c7e, type: 3}
+  spikesDownSound: {fileID: 8300000, guid: fbc0194f57cfa4b9b945d1fce6d129e2, type: 3}
+  audioSource: {fileID: 0}
 --- !u!95 &1631420140789319690
 Animator:
   serializedVersion: 7
@@ -17088,6 +17107,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connectedTraps:
   - {fileID: 8156835225448658746}
+  pressSound: {fileID: 8300000, guid: 0e23d40a94e7841e3a415aeadf0c5487, type: 3}
+  releaseSound: {fileID: 8300000, guid: 82751ec3cfa3746f6974b7ac665a2ba2, type: 3}
+  audioSource: {fileID: 0}
 --- !u!95 &6843140482297491185
 Animator:
   serializedVersion: 7
@@ -17182,6 +17204,9 @@ MonoBehaviour:
   spikesUp: 1
   spikeCollider: {fileID: 1099360023960701893}
   playerTag: Player
+  spikesUpSound: {fileID: 8300000, guid: 94bb52d077fea4b7b8a2cea4e34a1c7e, type: 3}
+  spikesDownSound: {fileID: 8300000, guid: fbc0194f57cfa4b9b945d1fce6d129e2, type: 3}
+  audioSource: {fileID: 0}
 --- !u!95 &4229178506521105537
 Animator:
   serializedVersion: 7
@@ -17806,6 +17831,9 @@ MonoBehaviour:
   requiredDarkKeys: 1
   interactionTrigger: {fileID: 6285788489079078676}
   disappearDuration: 0.5
+  lockedSound: {fileID: 8300000, guid: 76684635f917c41f6bbf7fa6afd2b8a2, type: 3}
+  openSound: {fileID: 8300000, guid: a19aadfcd72db4168baf14af49fc0580, type: 3}
+  audioSource: {fileID: 0}
 --- !u!65 &6285788489079078676
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18452,6 +18480,9 @@ MonoBehaviour:
   spikesUp: 1
   spikeCollider: {fileID: 337015661820593787}
   playerTag: Player
+  spikesUpSound: {fileID: 8300000, guid: 94bb52d077fea4b7b8a2cea4e34a1c7e, type: 3}
+  spikesDownSound: {fileID: 8300000, guid: fbc0194f57cfa4b9b945d1fce6d129e2, type: 3}
+  audioSource: {fileID: 0}
 --- !u!95 &3438469891991519541
 Animator:
   serializedVersion: 7
@@ -19217,6 +19248,9 @@ MonoBehaviour:
   connectedTraps:
   - {fileID: 4861585414592083221}
   - {fileID: 3701461134630894865}
+  pressSound: {fileID: 8300000, guid: 0e23d40a94e7841e3a415aeadf0c5487, type: 3}
+  releaseSound: {fileID: 8300000, guid: 82751ec3cfa3746f6974b7ac665a2ba2, type: 3}
+  audioSource: {fileID: 0}
 --- !u!95 &452209334488488225
 Animator:
   serializedVersion: 7
